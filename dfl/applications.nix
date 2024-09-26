@@ -1,33 +1,40 @@
 {
   fetchFromGitLab,
   clangStdenv,
-  pkgs,
   lib,
+  qt6Packages,
+  pkg-config,
+  meson,
+  ninja,
+  cmake,
+  qttools,
+  qtbase,
   ...
 }:
 # Desktop Frameworks: Applications
 clangStdenv.mkDerivation {
   pname = "dfl-applications";
-  version = "19291975";
+  version = "0.2.0";
 
   dontWrapQtApps = true;
-  nativeBuildInputs = with pkgs; [
+  nativeBuildInputs = [
     pkg-config
     meson
     ninja
+    qttools
+    cmake
   ];
-  buildInputs = with pkgs; [
-    qt6.qtbase
-    (callPackage ./ipc.nix { })
+  buildInputs = [
+    qtbase
+    (qt6Packages.callPackage ./ipc.nix { })
   ];
 
   src = fetchFromGitLab {
     owner = "desktop-frameworks";
     repo = "applications";
-    rev = "19291975c84a65a6abaf23ff8a7dd50239e6cde5";
+    rev = "v0.2.0";
     hash = "sha256-Q5xt9M4VoJpd756GiHfbto73y3OuDCjdDSdfCK0mzEk=";
   };
-  mesonBuildType = "release";
   mesonFlags = [
     "-Duse_qt_version=qt6"
   ];
@@ -39,6 +46,7 @@ clangStdenv.mkDerivation {
       between the first and the subsequent instances.
     '';
     homepage = "https://gitlab.com/desktop-frameworks/applications";
-    license = licenses.gpl3Plus;
+    maintainers = with maintainers; [ ckgxrg ];
+    license = licenses.gpl3Only;
   };
 }

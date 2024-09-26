@@ -6,25 +6,30 @@
   };
   outputs =
     inputs@{
+      self,
       nixpkgs,
       ...
     }:
-    {
+    let
+      pkgs = import nixpkgs {
+        system = "x86_64-linux";
+        config.allowUnfree = true;
+      };
+    in {
       # The packages
-      packages."x86_64-linux" = with nixpkgs.legacyPackages."x86_64-linux"; {
-        dfl-applications = (callPackage ./dfl/applications.nix { });
-        dfl-ipc = (callPackage ./dfl/ipc.nix { });
-        dfl-login1 = (callPackage ./dfl/login1.nix { });
-        dfl-utils = (callPackage ./dfl/utils.nix { });
-        dfl-wayqt = (callPackage ./dfl/wayqt.nix { });
-        alacritty-themes = (callPackage ./theming/alacritty-themes.nix { });
-        googledot-cursor = (callPackage ./theming/googledot-cursor.nix { });
-        nu-scripts = (callPackage ./theming/nu-scripts.nix { });
-        qtgreet = (callPackage ./qtgreet.nix { });
-        sugar-candy-sddm = (callPackage ./theming/sugar-candy-sddm.nix { });
-        vivid-icons = (callPackage ./theming/vivid-icons.nix { });
-        wvkbd-desktop = (callPackage ./wvkbd-desktop.nix { });
-        bilibili = (callPackage ./bilibili.nix { });
+      packages.${pkgs.system} = with pkgs; {
+        dfl-ipc = qt6Packages.callPackage ./dfl/ipc.nix { };
+        dfl-applications = qt6Packages.callPackage ./dfl/applications.nix { dfl-ipc = self.packages.${pkgs.system}.dfl-ipc; };
+        dfl-login1 = qt6Packages.callPackage ./dfl/login1.nix { };
+        dfl-utils = qt6Packages.callPackage ./dfl/utils.nix { };
+        alacritty-themes = callPackage ./theming/alacritty-themes.nix { };
+        googledot-cursor = callPackage ./theming/googledot-cursor.nix { };
+        nu-scripts = callPackage ./theming/nu-scripts.nix { };
+        qtgreet = qt6Packages.callPackage ./qtgreet.nix { };
+        sugar-candy-sddm = callPackage ./theming/sugar-candy-sddm.nix { };
+        vivid-icons = callPackage ./theming/vivid-icons.nix { };
+        wvkbd-desktop = callPackage ./wvkbd-desktop.nix { };
+        bilibili = callPackage ./bilibili.nix { };
       };
     };
 }

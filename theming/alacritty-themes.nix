@@ -26,6 +26,7 @@ stdenv.mkDerivation {
       Collection of colorschemes for easy configuration of the Alacritty terminal emulator.
     '';
     homepage = "https://github.com/alacritty/alacritty-theme";
+    maintainers = with maintainers; [ ckgxrg ];
     license = licenses.asl20;
   };
 }

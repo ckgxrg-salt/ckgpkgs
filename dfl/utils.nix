@@ -1,32 +1,34 @@
 {
   fetchFromGitLab,
   clangStdenv,
-  pkgs,
   lib,
+  qttools,
+  meson,
+  ninja,
+  qtbase,
   ...
 }:
 # Desktop Frameworks: Utils
 clangStdenv.mkDerivation {
   pname = "dfl-utils";
-  version = "dc97a675";
+  version = "0.2.0";
 
   dontWrapQtApps = true;
-  nativeBuildInputs = with pkgs; [
-    pkg-config
+  nativeBuildInputs = [
+    qttools
     meson
     ninja
   ];
-  buildInputs = with pkgs; [
-    qt6.qtbase
+  buildInputs = [
+    qtbase
   ];
 
   src = fetchFromGitLab {
     owner = "desktop-frameworks";
     repo = "utils";
-    rev = "dc97a675b79b95b60b9bfb803cb300b1b38e9764";
+    rev = "v0.2.0";
     hash = "sha256-IxWYxQP9y51XbZAR+VOex/GYZblAWs8KmoaoFvU0rCY=";
   };
-  mesonBuildType = "release";
   mesonFlags = [
     "-Duse_qt_version=qt6"
   ];
@@ -40,6 +42,7 @@ clangStdenv.mkDerivation {
       and RAM info.
     '';
     homepage = "https://gitlab.com/desktop-frameworks/utils";
+    maintainers = with maintainers; [ ckgxrg ];
     license = licenses.gpl3Plus;
   };
 }

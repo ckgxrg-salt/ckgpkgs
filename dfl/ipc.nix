@@ -1,33 +1,36 @@
 {
   fetchFromGitLab,
   clangStdenv,
-  pkgs,
   lib,
+  meson,
+  ninja,
+  qttools,
+  qtbase,
+  nlohmann_json,
   ...
 }:
 # Desktop Frameworks: IPC
 clangStdenv.mkDerivation {
   pname = "dfl-ipc";
-  version = "4bdf90c0";
+  version = "0.2.0";
 
   dontWrapQtApps = true;
-  nativeBuildInputs = with pkgs; [
-    pkg-config
+  nativeBuildInputs = [
     meson
     ninja
-    nlohmann_json
+    qttools
   ];
-  buildInputs = with pkgs; [
-    qt6.qtbase
+  buildInputs = [
+    qtbase
+    nlohmann_json
   ];
 
   src = fetchFromGitLab {
     owner = "desktop-frameworks";
     repo = "ipc";
-    rev = "4bdf90c0a84fddca14f1058a84f2811eaa83ba0f";
+    rev = "v0.2.0";
     hash = "sha256-MnS/ZswctYl2FennsG1IxZ6s4N/i/LcJGHRuyXqJIM8=";
   };
-  mesonBuildType = "release";
   mesonFlags = [
     "-Duse_qt_version=qt6"
   ];
@@ -39,6 +42,7 @@ clangStdenv.mkDerivation {
       These classes are used in DFL::Application.
     '';
     homepage = "https://gitlab.com/desktop-frameworks/ipc";
-    license = licenses.gpl3Plus;
+    maintainers = with maintainers; [ ckgxrg ];
+    license = licenses.gpl3Only;
   };
 }

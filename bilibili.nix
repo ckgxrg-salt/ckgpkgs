@@ -48,6 +48,7 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [
       jedsek
       kashw2
+      ckgxrg
     ];
     platforms = [ "x86_64-linux" ];
     sourceProvenance = with sourceTypes; [ binaryNativeCode ];
