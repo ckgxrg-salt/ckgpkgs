@@ -24,6 +24,7 @@
         sugar-candy-sddm = (callPackage ./theming/sugar-candy-sddm.nix { });
         vivid-icons = (callPackage ./theming/vivid-icons.nix { });
         wvkbd-desktop = (callPackage ./wvkbd-desktop.nix { });
+        bilibili = (callPackage ./bilibili.nix { });
       };
     };
 }
