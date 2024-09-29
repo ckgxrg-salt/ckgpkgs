@@ -27,6 +27,7 @@
         nu-scripts = callPackage ./packages/theming/nu-scripts.nix { };
         qtgreet = qt6Packages.callPackage ./packages/qtgreet.nix { };
         sugar-candy-sddm = libsForQt5.callPackage ./packages/theming/sugar-candy-sddm.nix { };
+        otto-kvantum = callPackage ./packages/theming/otto-kvantum.nix { };
         vivid-icons = callPackage ./packages/theming/vivid-icons.nix { };
         wvkbd-desktop = callPackage ./packages/wvkbd-desktop.nix { };
         bilibili = callPackage ./packages/bilibili.nix { };

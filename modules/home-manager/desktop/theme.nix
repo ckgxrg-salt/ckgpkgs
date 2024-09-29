@@ -13,10 +13,6 @@ in
 {
   options.ckgxrg.themes = {
     enable = mkEnableOption "ckgxrg's Theme Configurations";
-    guideMako = mkOption {
-      type = types.bool;
-      default = false;
-    };
     withFlatpak = mkOption {
       type = types.bool;
       default = false;
@@ -111,9 +107,6 @@ in
       env = XCURSOR_SIZE,${builtins.toString cfg.cursor.size}
       env = ICON_THEME,${cfg.icon.name}
     '';
-
-    # Mako vs Alien paths
-    services.mako.iconPath = mkIf cfg.guideMako "${config.home.profileDirectory}/share/icons/${cfg.icon.name}";
 
     # Then make them availiable to Flatpaks
     home.activation = mkIf cfg.withFlatpak {

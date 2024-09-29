@@ -31,7 +31,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    xdg.sounds.enable = false;
     home.packages = [
       cfg.libcanberra
       cfg.package
