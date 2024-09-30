@@ -11,7 +11,7 @@ stdenv.mkDerivation {
 
   dontBuild = true;
   nativeBuildInputs = [ jdupes ];
-  
+
   src = fetchFromGitLab {
     owner = "jomada";
     repo = "edna";

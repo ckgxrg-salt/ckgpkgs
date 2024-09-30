@@ -15,7 +15,8 @@
         system = "x86_64-linux";
         config.allowUnfree = true;
       };
-    in {
+    in
+    {
       # The packages
       packages.${pkgs.system} = with pkgs; {
         dfl-ipc = qt6Packages.callPackage ./packages/dfl/ipc.nix { };
@@ -28,6 +29,7 @@
         qtgreet = qt6Packages.callPackage ./packages/qtgreet.nix { };
         sugar-candy-sddm = libsForQt5.callPackage ./packages/theming/sugar-candy-sddm.nix { };
         otto-kvantum = callPackage ./packages/theming/otto-kvantum.nix { };
+        otis-gtk = callPackage ./packages/theming/otis-gtk.nix { };
         vivid-icons = callPackage ./packages/theming/vivid-icons.nix { };
         wvkbd-desktop = callPackage ./packages/wvkbd-desktop.nix { };
         bilibili = callPackage ./packages/bilibili.nix { };

@@ -17,7 +17,7 @@ stdenv.mkDerivation {
     rev = "3bcf68e5e1516fdc427a1b5aa7ed6438f55520df";
     hash = "sha256-Ef5A7eCeUrMuzajglWGVSCBAkg+Z0X2c+yS1AjzaLB4=";
   };
-  
+
   nativeBuildInputs = [ jdupes ];
   propagatedUserEnvPkgs = [ gtk-engine-murrine ];
   installPhase = ''
