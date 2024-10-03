@@ -26,6 +26,7 @@ in
       };
     };
     qt = {
+      followGTK = mkEnableOption "Unify Qt and GTK Look";
       name = mkOption {
         type = types.str;
       };
@@ -61,7 +62,13 @@ in
       };
     };
   };
+
   config = mkIf cfg.enable {
+    warnings =
+      if (cfg.qt.followGTK && (cfg.qt.name != null)) then
+        [ "Qt is following GTK theme, the indicated Qt theme will be invalid. " ]
+      else
+        [ ];
     # GTK Look and Feel
     gtk = {
       enable = (cfg.gtk != null);
@@ -84,12 +91,20 @@ in
     };
 
     # Qt Style
-    qt = {
-      enable = (cfg.qt != null);
-      platformTheme.name = "qtct";
-      style.name = "kvantum";
-    };
-    xdg.configFile = {
+    qt =
+      if cfg.qt.followGTK then
+        {
+          enable = true;
+          platformTheme.name = "gtk2";
+          style.name = "gtk2";
+        }
+      else
+        {
+          enable = true;
+          platformTheme.name = "qtct";
+          style.name = "kvantum";
+        };
+    xdg.configFile = mkIf (!cfg.qt.followGTK) {
       "Kvantum/kvantum.kvconfig".text = ''
         [General]
         theme=${cfg.qt.name}
@@ -141,7 +156,8 @@ in
         Environment = {
           "GTK_THEME" = cfg.gtk.name;
           "ICON_THEME" = cfg.icon.name;
-          "QT_STYLE_OVERRIDE" = "kvantum";
+          "QT_QPA_PLATFORMTHEME" = if cfg.qt.followGTK then "gtk2" else "qt5ct";
+          "QT_STYLE_OVERRIDE" = if cfg.qt.followGTK then "gtk2" else "kvantum";
           "HYPRCURSOR_THEME" = cfg.cursor.name;
           "HYPRCURSOR_SIZE" = (builtins.toString cfg.cursor.size);
           "XCURSOR_PATH" = "${cfg.cursor.pkg}/share/icons";
