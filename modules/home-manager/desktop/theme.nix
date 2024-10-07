@@ -26,7 +26,7 @@ in
       };
     };
     qt = {
-      followGTK = mkEnableOption "Unify Qt and GTK Look";
+      followGTK = mkEnableOption "Use GTK theme for Qt, may not work properly. ";
       name = mkOption {
         type = types.str;
       };
