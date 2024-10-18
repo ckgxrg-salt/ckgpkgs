@@ -27,7 +27,7 @@ clangStdenv.mkDerivation {
     owner = "desktop-frameworks";
     repo = "login1";
     rev = "v0.2.0";
-    hash = "sha256-7URHVc0082LuzteSXAK1nE7vcArrsxaHG1LCV/RvTm4=";
+    hash = "sha256-3BiYN8CdRTvopQuEfpemfAM3pQ7DAlCvZepBEf7IXiU=";
   };
   mesonFlags = [
     "-Duse_qt_version=qt6"

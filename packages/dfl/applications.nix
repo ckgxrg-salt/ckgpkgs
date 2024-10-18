@@ -33,7 +33,7 @@ clangStdenv.mkDerivation {
     owner = "desktop-frameworks";
     repo = "applications";
     rev = "v0.2.0";
-    hash = "sha256-Q5xt9M4VoJpd756GiHfbto73y3OuDCjdDSdfCK0mzEk=";
+    hash = "sha256-I6W37tThshlL79lmMipJqynXsfjFRw6WzLPPw0dvqH4=";
   };
   mesonFlags = [
     "-Duse_qt_version=qt6"

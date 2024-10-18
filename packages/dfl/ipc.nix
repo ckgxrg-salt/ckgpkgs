@@ -29,7 +29,7 @@ clangStdenv.mkDerivation {
     owner = "desktop-frameworks";
     repo = "ipc";
     rev = "v0.2.0";
-    hash = "sha256-MnS/ZswctYl2FennsG1IxZ6s4N/i/LcJGHRuyXqJIM8=";
+    hash = "sha256-Dz9ilrA/w+LR7cG7JBykC6n32s00kPoUayQtXuTkdss=";
   };
   mesonFlags = [
     "-Duse_qt_version=qt6"

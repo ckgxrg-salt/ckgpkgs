@@ -147,9 +147,6 @@ in
         Context.filesystems = [
           "${config.home.homeDirectory}/.themes:ro"
           "${config.home.homeDirectory}/.icons:ro"
-          "${cfg.gtk.pkg}/share/themes:ro"
-          "${cfg.icon.pkg}/share/icons:ro"
-          "${cfg.cursor.pkg}/share/icons:ro"
           "xdg-config/Kvantum:ro"
         ];
         # Set themes
@@ -160,7 +157,6 @@ in
           "QT_STYLE_OVERRIDE" = if cfg.qt.followGTK then "gtk2" else "kvantum";
           "HYPRCURSOR_THEME" = cfg.cursor.name;
           "HYPRCURSOR_SIZE" = (builtins.toString cfg.cursor.size);
-          "XCURSOR_PATH" = "${cfg.cursor.pkg}/share/icons";
           "XCURSOR_THEME" = cfg.cursor.name;
           "XCURSOR_SIZE" = (builtins.toString cfg.cursor.size);
         };
