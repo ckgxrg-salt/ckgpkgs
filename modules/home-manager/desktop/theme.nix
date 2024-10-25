@@ -12,10 +12,6 @@ in
 {
   options.ckgxrg.themes = {
     enable = mkEnableOption "ckgxrg's Theme Configurations";
-    withFlatpak = mkOption {
-      type = types.bool;
-      default = false;
-    };
     gtk = {
       name = mkOption {
         type = types.str;
