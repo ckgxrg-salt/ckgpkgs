@@ -96,7 +96,7 @@ in
       else
         {
           enable = true;
-          platformTheme.name = "qt5ct";
+          platformTheme.name = "qtct";
           style.name = "kvantum";
         };
     xdg.configFile = mkIf (!cfg.qt.followGTK) {
