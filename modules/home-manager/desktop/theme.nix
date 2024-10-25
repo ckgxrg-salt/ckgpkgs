@@ -135,30 +135,32 @@ in
         run ln -sfT ${cfg.gtk.pkg}/share/themes/${cfg.gtk.name} /home/ckgxrg/.themes/${cfg.gtk.name}
       '';
     };
-    services.flatpak.overrides = mkIf cfg.withFlatpak {
-      global = {
-        # Force Wayland
-        Context.sockets = [
-          "wayland"
-          "!x11"
-          "fallback-x11"
-        ];
-        # Make files accessible to flatpaks
-        Context.filesystems = [
-          "${config.home.homeDirectory}/.themes:ro"
-          "${config.home.homeDirectory}/.icons:ro"
-          "xdg-config/Kvantum:ro"
-        ];
-        # Set themes
-        Environment = {
-          "GTK_THEME" = cfg.gtk.name;
-          "ICON_THEME" = cfg.icon.name;
-          "QT_QPA_PLATFORMTHEME" = if cfg.qt.followGTK then "gtk2" else "qt5ct";
-          "QT_STYLE_OVERRIDE" = if cfg.qt.followGTK then "gtk2" else "kvantum";
-          "HYPRCURSOR_THEME" = cfg.cursor.name;
-          "HYPRCURSOR_SIZE" = (builtins.toString cfg.cursor.size);
-          "XCURSOR_THEME" = cfg.cursor.name;
-          "XCURSOR_SIZE" = (builtins.toString cfg.cursor.size);
+    services = mkIf cfg.withFlatpak {
+      flatpak.overrides = {
+        global = {
+          # Force Wayland
+          Context.sockets = [
+            "wayland"
+            "!x11"
+            "fallback-x11"
+          ];
+          # Make files accessible to flatpaks
+          Context.filesystems = [
+            "${config.home.homeDirectory}/.themes:ro"
+            "${config.home.homeDirectory}/.icons:ro"
+            "xdg-config/Kvantum:ro"
+          ];
+          # Set themes
+          Environment = {
+            "GTK_THEME" = cfg.gtk.name;
+            "ICON_THEME" = cfg.icon.name;
+            "QT_QPA_PLATFORMTHEME" = if cfg.qt.followGTK then "gtk2" else "qt5ct";
+            "QT_STYLE_OVERRIDE" = if cfg.qt.followGTK then "gtk2" else "kvantum";
+            "HYPRCURSOR_THEME" = cfg.cursor.name;
+            "HYPRCURSOR_SIZE" = (builtins.toString cfg.cursor.size);
+            "XCURSOR_THEME" = cfg.cursor.name;
+            "XCURSOR_SIZE" = (builtins.toString cfg.cursor.size);
+          };
         };
       };
     };

@@ -32,7 +32,6 @@
         otis-gtk = callPackage ./packages/theming/otis-gtk.nix { };
         vivid-icons = callPackage ./packages/theming/vivid-icons.nix { };
         wvkbd-desktop = callPackage ./packages/wvkbd-desktop.nix { };
-        bilibili = callPackage ./packages/bilibili.nix { };
       };
 
       # The system-level modules
