@@ -46,6 +46,11 @@ in
         gtk-enable-input-feedback-sounds = true;
         gtk-sound-theme-name = cfg.theme;
       };
+      gtk4.extraConfig = {
+        gtk-enable-event-sounds = true;
+        gtk-enable-input-feedback-sounds = true;
+        gtk-sound-theme-name = cfg.theme;
+      };
     };
   };
 }
