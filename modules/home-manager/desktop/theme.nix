@@ -1,5 +1,4 @@
 {
-  ckgxrg,
   config,
   lib,
   pkgs,
@@ -122,47 +121,5 @@ in
       env = XCURSOR_SIZE,${builtins.toString cfg.cursor.size}
       env = ICON_THEME,${cfg.icon.name}
     '';
-
-    # Then make them availiable to Flatpaks
-    home.activation = mkIf cfg.withFlatpak {
-      fixFlatpakThemes = ''
-        run mkdir -p ${config.home.homeDirectory}/.icons
-        run mkdir -p ${config.home.homeDirectory}/.themes
-        run rm -rf ${config.home.homeDirectory}/.icons/*
-        run rm -rf ${config.home.homeDirectory}/.themes/*
-        run ln -sfT ${cfg.icon.pkg}/share/icons/${cfg.icon.name} /home/ckgxrg/.icons/${cfg.icon.name}
-        run ln -sfT ${cfg.cursor.pkg}/share/icons/${cfg.cursor.name} /home/ckgxrg/.icons/${cfg.cursor.name}
-        run ln -sfT ${cfg.gtk.pkg}/share/themes/${cfg.gtk.name} /home/ckgxrg/.themes/${cfg.gtk.name}
-      '';
-    };
-    services = mkIf cfg.withFlatpak {
-      flatpak.overrides = {
-        global = {
-          # Force Wayland
-          Context.sockets = [
-            "wayland"
-            "!x11"
-            "fallback-x11"
-          ];
-          # Make files accessible to flatpaks
-          Context.filesystems = [
-            "${config.home.homeDirectory}/.themes:ro"
-            "${config.home.homeDirectory}/.icons:ro"
-            "xdg-config/Kvantum:ro"
-          ];
-          # Set themes
-          Environment = {
-            "GTK_THEME" = cfg.gtk.name;
-            "ICON_THEME" = cfg.icon.name;
-            "QT_QPA_PLATFORMTHEME" = if cfg.qt.followGTK then "gtk2" else "qt5ct";
-            "QT_STYLE_OVERRIDE" = if cfg.qt.followGTK then "gtk2" else "kvantum";
-            "HYPRCURSOR_THEME" = cfg.cursor.name;
-            "HYPRCURSOR_SIZE" = (builtins.toString cfg.cursor.size);
-            "XCURSOR_THEME" = cfg.cursor.name;
-            "XCURSOR_SIZE" = (builtins.toString cfg.cursor.size);
-          };
-        };
-      };
-    };
   };
 }
