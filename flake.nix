@@ -5,7 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   };
   outputs =
-    inputs@{
+    {
       self,
       nixpkgs,
       ...
@@ -32,6 +32,7 @@
         otis-gtk = callPackage ./packages/theming/otis-gtk.nix { };
         vivid-icons = callPackage ./packages/theming/vivid-icons.nix { };
         wvkbd-desktop = callPackage ./packages/wvkbd-desktop.nix { };
+        fyrox-template = callPackage ./packages/fyrox-template.nix { };
       };
 
       # The system-level modules
