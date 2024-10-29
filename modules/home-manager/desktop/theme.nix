@@ -86,7 +86,7 @@ in
     };
 
     # Home-manager cursor
-    home.pointCursor = {
+    home.pointerCursor = {
       name = cfg.cursor.name;
       package = cfg.cursor.pkg;
     };
