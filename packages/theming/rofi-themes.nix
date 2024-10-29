@@ -1,7 +1,9 @@
 {
   fetchFromGitHub,
   stdenvNoCC,
-  lib
+  lib,
+  type ? "type-1",
+  style ? "style-1"
 }:
 # adi1090x's rofi theme collection
 stdenvNoCC.mkDerivation {
@@ -19,12 +21,13 @@ stdenvNoCC.mkDerivation {
   installPhase = ''
     mkdir -p $out/config/rofi
     cp -rf files/* $out/config/rofi
+    ln -s $out/config/rofi/launchers/${type}/${style}.rasi $out/config/rofi/theme.rasi
   '';
 
   meta = with lib; {
     description = "A huge collection of Rofi based custom Applets, Launchers & Powermenus.";
     homepage = "https://github.com/adi1090x/rofi";
     maintainers = with maintainers; [ ckgxrg ];
-    license = licenses.gpl3Only;
+    license = licenses.gpl3;
   };
 }
