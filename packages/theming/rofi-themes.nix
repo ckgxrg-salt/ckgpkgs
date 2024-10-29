@@ -1,9 +1,7 @@
 {
   fetchFromGitHub,
   stdenvNoCC,
-  lib,
-  type ? "type-1",
-  style ? "style-1"
+  lib
 }:
 # adi1090x's rofi theme collection
 stdenvNoCC.mkDerivation {
@@ -21,7 +19,6 @@ stdenvNoCC.mkDerivation {
   installPhase = ''
     mkdir -p $out/config/rofi
     cp -rf files/* $out/config/rofi
-    ln -s $out/config/rofi/launchers/${type}/${style}.rasi $out/config/rofi/theme.rasi
   '';
 
   meta = with lib; {
