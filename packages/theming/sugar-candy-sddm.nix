@@ -4,8 +4,7 @@
   qtgraphicaleffects,
   qtquickcontrols2,
   qtsvg,
-  jdupes,
-  ...
+  jdupes
 }:
 # The Sugar Candy SDDM theme
 stdenv.mkDerivation {

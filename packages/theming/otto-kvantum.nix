@@ -1,11 +1,10 @@
 {
   fetchFromGitLab,
-  stdenv,
-  jdupes,
-  ...
+  stdenvNoCC,
+  jdupes
 }:
 # The Otto Kvantum theme
-stdenv.mkDerivation {
+stdenvNoCC.mkDerivation {
   pname = "otto-kvantum-theme";
   version = "e49204ff";
 

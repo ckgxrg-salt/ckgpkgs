@@ -1,11 +1,10 @@
 {
   fetchFromGitLab,
-  stdenv,
-  jdupes,
-  ...
+  stdenvNoCC,
+  jdupes
 }:
 # The Edna Kvantum theme
-stdenv.mkDerivation {
+stdenvNoCC.mkDerivation {
   pname = "edna-kvantum-theme";
   version = "22e713f2";
 

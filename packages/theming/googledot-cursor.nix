@@ -1,6 +1,6 @@
-{ fetchurl, stdenv, ... }:
+{ fetchurl, stdenvNoCC }:
 # The GoogleDot Cursor theme
-stdenv.mkDerivation {
+stdenvNoCC.mkDerivation {
   pname = "googledot-cursor";
   version = "2.0.0";
   dontBuild = true;

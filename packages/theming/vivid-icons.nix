@@ -1,6 +1,6 @@
-{ fetchFromGitHub, stdenv, ... }:
+{ fetchFromGitHub, stdenvNoCC }:
 # The Vivid icon theme
-stdenv.mkDerivation {
+stdenvNoCC.mkDerivation {
   pname = "vivid-icon-theme";
   version = "5aa7ade";
   dontBuild = true;

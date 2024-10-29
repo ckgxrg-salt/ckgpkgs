@@ -1,12 +1,11 @@
 {
   fetchFromGitHub,
-  stdenv,
+  stdenvNoCC,
   lib,
-  theme ? "dark_plus",
-  ...
+  theme ? "dark_plus"
 }:
 # Themes for the Alacritty terminal emulator
-stdenv.mkDerivation {
+stdenvNoCC.mkDerivation {
   pname = "alacritty-themes";
   version = "e759daf";
   dontBuild = true;

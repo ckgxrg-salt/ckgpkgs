@@ -1,12 +1,11 @@
 {
   fetchFromGitHub,
-  stdenv,
+  stdenvNoCC,
   lib,
   theme ? "default-dark",
-  ...
 }:
 # Themes for nushell
-stdenv.mkDerivation {
+stdenvNoCC.mkDerivation {
   pname = "nu-scripts";
   version = "f74b2aa";
   dontBuild = true;

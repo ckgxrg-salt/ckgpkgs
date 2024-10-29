@@ -1,12 +1,11 @@
 {
   fetchFromGitHub,
-  stdenv,
+  stdenvNoCC,
   jdupes,
-  gtk-engine-murrine,
-  ...
+  gtk-engine-murrine
 }:
 # The Otis GTK theme
-stdenv.mkDerivation {
+stdenvNoCC.mkDerivation {
   pname = "otis-gtk-theme";
   version = "3bcf68e";
 
