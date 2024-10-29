@@ -44,7 +44,7 @@ in
       home.packages = [ cfg.package ];
 
       xdg.configFile."alacritty/alacritty.toml".text =
-        lib.optionalString (cfg.theme != null) "import = [\""
+        lib.optionalString (cfg.theme != null) "general.import = [\""
         + "${cfg.theme}/theme.toml"
         + "\"]"
         + "\n"
