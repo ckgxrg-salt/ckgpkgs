@@ -1,9 +1,7 @@
 {
   fetchFromGitHub,
   stdenvNoCC,
-  lib,
-  type ? "type-1",
-  style ? "style-1"
+  lib
 }:
 # adi1090x's rofi theme collection
 stdenvNoCC.mkDerivation {
@@ -21,8 +19,7 @@ stdenvNoCC.mkDerivation {
   installPhase = ''
     mkdir -p $out/config/rofi
     cp -rf files/* $out/config/rofi
-    substituteInPlace `find $out -type f -not -name "*.png" -not -name "*.jpg" -not -name "*.jpeg"` --replace-quiet \$HOME/.config $out/config
-    substituteInPlace `find $out -type f -not -name "*.png" -not -name "*.jpg" -not -name "*.jpeg"` --replace-warn \~/.config $out/config
+    find "$out" -type f -exec sed -i 's/$HOME\/.config/\\\\$out\/config/g' {} \;
   '';
 
   meta = with lib; {
