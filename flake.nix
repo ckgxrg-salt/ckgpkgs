@@ -11,8 +11,9 @@
       ...
     }:
     let
+      system = "x86_64-linux";
       pkgs = import nixpkgs {
-        system = "x86_64-linux";
+        inherit system;
         config.allowUnfree = true;
       };
     in
@@ -47,5 +48,22 @@
         default = self.homeManagerModules.ckgmods;
         ckgmods = import ./modules/ckgmods.nix;
       };
+
+      # A nix develop shell including formatter and linter to be used with Neovim
+      devShell.${system} = pkgs.mkShell {
+        name = "ckgpkgs";
+
+        buildInputs = with pkgs; [
+          nixfmt-rfc-style
+          deadnix
+        ];
+
+        shellHook = ''
+          exec nu
+        '';
+      };
+
+      # Support nix fmt command
+      formatter.${system} = pkgs.nixfmt-rfc-style;
     };
 }
