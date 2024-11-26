@@ -35,6 +35,7 @@
         wvkbd-desktop = callPackage ./packages/wvkbd-desktop.nix { };
         fyrox-template = callPackage ./packages/fyrox-template.nix { };
         rofi-themes = callPackage ./packages/theming/rofi-themes.nix { };
+        maple-ui = callPackage ./packages/theming/maple-ui.nix { };
       };
 
       # The system-level modules
