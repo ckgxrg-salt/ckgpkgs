@@ -36,6 +36,7 @@
         fyrox-template = callPackage ./packages/fyrox-template.nix { };
         rofi-themes = callPackage ./packages/theming/rofi-themes.nix { };
         maple-ui = callPackage ./packages/theming/maple-ui.nix { };
+        commet-chat = callPackage ./packages/communication/commet.nix { };
       };
 
       # The system-level modules
