@@ -52,7 +52,7 @@
       };
 
       # A nix develop shell including formatter and linter to be used with Neovim
-      devShell.${system} = pkgs.mkShell {
+      devShell.${system} = pkgs.mkShellNoCC {
         name = "ckgpkgs";
 
         buildInputs = with pkgs; [
