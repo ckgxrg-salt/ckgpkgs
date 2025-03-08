@@ -12,8 +12,8 @@ stdenvNoCC.mkDerivation {
   src = fetchFromGitHub {
     owner = "nushell";
     repo = "nu_scripts";
-    rev = "f74b2aa7770a4c78ac7cb13fe2015f23ed9c597c";
-    hash = "sha256-P0cZ2OflWpiB3TB6VUU6ne9WQrSV3Dwq8wYeysAdMNs=";
+    rev = "e245718d308b107997b34e408df72acba395590a";
+    hash = "sha256-QB8suiHQa/fO4Bu2XJMCiIRseLKL4YBkFwl0zI0XkAo=";
   };
   installPhase = ''
     mkdir -p $out

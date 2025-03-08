@@ -32,21 +32,19 @@ stdenv.mkDerivation {
   src = fetchFromGitHub {
     owner = "FearlessSpiff";
     repo = "wvkbd";
-    rev = "f1a1865f6ba4cfc765d1abf798211462dde27e07";
-    hash = "sha256-egN/vwAS/40HymvvsPX2LMCB8PmJKWTjJegRGBno2Ao=";
+    rev = "231623a9c66b1aa70b48f8b789fa01bab78045d9";
+    hash = "sha256-mBSIrs+OPvGO0JcEYnrq27ch//r8tYSfoD4sTV3rvLE=";
   };
 
   postPatch = ''
     substituteInPlace Makefile \
       --replace "pkg-config" "$PKG_CONFIG"
-  '';
-  buildPhase = ''
     substituteInPlace layout.desktop.h \
       --replace "" ""
-    make LAYOUT=desktop
+    substituteInPlace main.c \
+      --replace "DEFAULT_ROUNDING" "5"
   '';
-  installPhase = ''
-    mkdir -p $out/bin
-    mv wvkbd-desktop $out/bin
-  '';
+
+  makeFlags = [ "LAYOUT=desktop" ];
+  installFlags = [ "PREFIX=$(out)" ];
 }

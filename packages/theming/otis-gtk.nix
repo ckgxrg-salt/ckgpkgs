@@ -2,7 +2,7 @@
   fetchFromGitHub,
   stdenvNoCC,
   jdupes,
-  gtk-engine-murrine
+  gtk-engine-murrine,
 }:
 # The Otis GTK theme
 stdenvNoCC.mkDerivation {
@@ -13,8 +13,8 @@ stdenvNoCC.mkDerivation {
   src = fetchFromGitHub {
     owner = "EliverLara";
     repo = "otis";
-    rev = "3bcf68e5e1516fdc427a1b5aa7ed6438f55520df";
-    hash = "sha256-Ef5A7eCeUrMuzajglWGVSCBAkg+Z0X2c+yS1AjzaLB4=";
+    rev = "a3163513449d54511b35be7850bcc1c08b20eb4a";
+    hash = "sha256-MUVCxfnMm8zTFJIxfGS9CxI4reanqpw1pbPrXeiJPYE=";
   };
 
   nativeBuildInputs = [ jdupes ];

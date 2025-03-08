@@ -2,20 +2,18 @@
   fetchFromGitHub,
   stdenvNoCC,
   lib,
-  type ? "type-1",
-  style ? "style-1"
 }:
 # adi1090x's rofi theme collection
 stdenvNoCC.mkDerivation {
   pname = "rofi-themes";
   version = "f3835e7";
   dontBuild = true;
-  
+
   src = fetchFromGitHub {
     owner = "adi1090x";
     repo = "rofi";
-    rev = "f3835e7f728bf6d94fb3c2c683c6754e6ccd202e";
-    hash = "sha256-xlcI9K6cXJetaphkMW5mVWDshqcXeTtxAAwtOK5fF6s=";
+    rev = "2e0efe5054ac7eb502a585dd6b3575a65b80ce72";
+    hash = "sha256-TVZ7oTdgZ6d9JaGGa6kVkK7FMjNeuhVTPNj2d7zRWzM=";
   };
 
   installPhase = ''

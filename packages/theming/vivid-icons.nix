@@ -7,8 +7,8 @@ stdenvNoCC.mkDerivation {
   src = fetchFromGitHub {
     owner = "L4ki";
     repo = "Vivid-Plasma-Themes";
-    rev = "51d949ecef87c1b3376b7f402d487608afeb966d";
-    hash = "sha256-XD9IvvLPRS10ug6l3qQomDluqLrnnHMXjNCWZp3LweQ=";
+    rev = "6753fc4f3eea176c472e1ea1b5275e699aba0fd8";
+    hash = "sha256-sq9m2m8NXiDZDfN8r0BktfAriErXDWA4MTjh6cKi0z0=";
   };
   installPhase = ''
     mkdir -p $out/share/icons
