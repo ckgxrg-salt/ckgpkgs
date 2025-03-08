@@ -14,6 +14,7 @@ with pkgs;
   # GTK & Qt themes
   otis-gtk-theme = callPackage ./theming/otis-gtk.nix { };
   squared-gtk-theme = callPackage ./theming/squared-gtk.nix { };
+  space-gtk-theme = callPackage ./theming/space-gtk.nix { };
   marge-kvantum-theme = qt6Packages.callPackage ./theming/marge-kvantum.nix { };
 
   # My personal packages
