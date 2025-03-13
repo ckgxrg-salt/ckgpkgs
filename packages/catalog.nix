@@ -14,7 +14,8 @@ with pkgs;
   otis-gtk-theme = callPackage ./theming/otis-gtk.nix { };
   squared-gtk-theme = callPackage ./theming/squared-gtk.nix { };
   space-gtk-theme = callPackage ./theming/space-gtk.nix { };
-  marge-kvantum-theme = qt6Packages.callPackage ./theming/marge-kvantum.nix { };
+  marge-kvantum-theme = callPackage ./theming/marge-kvantum.nix { };
+  moe-kvantum-theme = callPackage ./theming/moe-kvantum.nix { };
 
   # Misc
   ch57x-keyboard-tool = callPackage ./ch57x-keyboard-tool.nix { };
