@@ -11,10 +11,10 @@ rustPlatform.buildRustPackage {
   src = fetchFromGitHub {
     owner = "ckgxrg-salt";
     repo = "LxWEngD";
-    rev = "581fe1ec9adf5b76f502c52c8959fe0760cc7f6d";
-    hash = "sha256-Yz7JF84D0zFVCrTgMvVxpu1Ij6qlC6jADx4JD4JKcYw=";
+    rev = "3f5d315f45f2e85713571f70a413a5c97bf1f14f";
+    hash = "sha256-3kBG15g96z+whx1TLofHu5m1Eqdja8dF4UP5weVnqiE=";
   };
-  cargoHash = "sha256-xjvungzXEoc46RTZS2QH3sMOX5CJdG1fIpAjWKgzmIE=";
+  cargoHash = "sha256-KClloDrShUiYjMkDljPYknJ9uGi0nu9nIXZ5vPwrrmc=";
   useFetchCargoVendor = true;
 
   meta = {
