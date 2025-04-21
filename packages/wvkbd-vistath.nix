@@ -16,13 +16,13 @@
 
 clangStdenv.mkDerivation {
   pname = "wvkbd";
-  version = "57d1de7";
+  version = "0.16";
 
   src = fetchFromGitHub {
     owner = "ckgxrg-salt";
     repo = "wvkbd";
-    rev = "57d1de7a8d38737bd6ab6089f5ff5f67d840f3ef";
-    hash = "sha256-3mGEsXEpYLtDnn5aBMVtzFygKrqFUFubXqiJ2NkldTw=";
+    rev = "f487f6696de47adef277b1971ee196debc3a0292";
+    hash = "sha256-8sul4vDAp0O/kb51nqr654rXY0gc+P5LAxxw9sUF3hg=";
   };
 
   postPatch = ''
