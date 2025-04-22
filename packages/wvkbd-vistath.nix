@@ -21,8 +21,8 @@ clangStdenv.mkDerivation {
   src = fetchFromGitHub {
     owner = "ckgxrg-salt";
     repo = "wvkbd";
-    rev = "f487f6696de47adef277b1971ee196debc3a0292";
-    hash = "sha256-8sul4vDAp0O/kb51nqr654rXY0gc+P5LAxxw9sUF3hg=";
+    rev = "a15512147b2c8ad978437b25aab7d488575eb7d1";
+    hash = "sha256-f5x3OoHIDj7iGExOoXtpzfyzqZOjwNe/C0mqUfALZ6o=";
   };
 
   postPatch = ''
