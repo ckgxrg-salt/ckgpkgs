@@ -13,6 +13,11 @@
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
+        config = {
+          permittedInsecurePackages = [
+            "olm-3.2.16"
+          ];
+        };
       };
     in
     {
