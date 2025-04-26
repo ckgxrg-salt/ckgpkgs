@@ -8,7 +8,7 @@
   mpv-unwrapped,
 }:
 flutter324.buildFlutterApplication rec {
-  pname = "commet";
+  pname = "commet-chat";
   version = "0.3.1+hotfix.1";
 
   src = fetchFromGitHub {
@@ -18,6 +18,7 @@ flutter324.buildFlutterApplication rec {
     hash = "sha256-FJRmEiov21Sm+OHrJdZ59MHanqq7hxsPBhMFwlEBK50=";
     fetchSubmodules = true;
   };
+  strictDeps = true;
   sourceRoot = "${src.name}/commet";
 
   pubspecLock = lib.importJSON ./pubspec.lock.json;
@@ -42,10 +43,6 @@ flutter324.buildFlutterApplication rec {
     libunwind
     libdovi
   ] ++ mpv-unwrapped.buildInputs;
-  flutterBuildFlags = [
-    "--dart-define BUILD_MODE=release"
-    "--dart-define PLATFORM=linux"
-  ];
 
   # The original codegen.dart hardcodes flutter calls inside, so the patch basically rewrites the codegen script forcing nix.
   patches = [
@@ -63,4 +60,32 @@ flutter324.buildFlutterApplication rec {
     echo "dependencies:" > .dart_tool/flutter_gen/pubspec.yaml
     packageRun build_runner build
   '';
+
+  flutterBuildFlags = [
+    "--release"
+    "--dart-define"
+    "BUILD_MODE=release"
+    "--dart-define"
+    "PLATFORM=linux"
+  ];
+
+  postInstall = ''
+    mkdir -p $out/share/applications
+    install -Dm644 \
+      linux/debian/usr/share/applications/chat.commet.commetapp.desktop \
+      $out/share/applications/
+    substituteInPlace $out/share/applications/chat.commet.commetapp.desktop \
+      --replace-fail "/usr/lib/chat.commet.commetapp/commet" "commet"
+
+    mkdir -p $out/share/icons
+    cp -r linux/debian/usr/share/icons/hicolor $out/share/icons/hicolor
+  '';
+
+  meta = with lib; {
+    homepage = "https://github.com/commetchat/commet";
+    description = "Your space to connect";
+    platforms = platforms.linux;
+    license = licenses.agpl3Only;
+    mainProgram = "commet";
+  };
 }
