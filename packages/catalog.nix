@@ -22,4 +22,5 @@ with pkgs;
   fyrox-template = callPackage ./fyrox-template.nix { };
   lxwengd = callPackage ./lxwengd.nix { };
   show-my-osk = callPackage ./show-my-osk.nix { };
+  commet-chat = callPackage ./commet-chat { };
 }
