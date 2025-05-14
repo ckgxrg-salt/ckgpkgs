@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, ags }:
 # All packages
 with pkgs;
 {
@@ -9,6 +9,15 @@ with pkgs;
   wvkbd-vistath = callPackage ./wvkbd-vistath.nix { };
   rofi-themes = callPackage ./theming/rofi-themes.nix { };
   maple-ui = callPackage ./theming/maple-ui.nix { };
+
+  # Astal
+  daywatch-astal = import ./astal/daywatch.nix { inherit pkgs ags; };
+  astal = {
+    daywatch = import ./astal/daywatch.nix { inherit pkgs ags; };
+    daywatch-logout = import ./astal/daywatch-logout.nix { inherit pkgs ags; };
+    vistath = import ./astal/vistath.nix { inherit pkgs ags; };
+    vistath-logout = import ./astal/vistath-logout.nix { inherit pkgs ags; };
+  };
 
   # GTK & Qt themes
   otis-gtk-theme = callPackage ./theming/otis-gtk.nix { };
