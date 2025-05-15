@@ -11,7 +11,6 @@ with pkgs;
   maple-ui = callPackage ./theming/maple-ui.nix { };
 
   # Astal
-  daywatch-astal = import ./astal/daywatch.nix { inherit pkgs ags; };
   astal = {
     daywatch = import ./astal/daywatch.nix { inherit pkgs ags; };
     daywatch-logout = import ./astal/daywatch-logout.nix { inherit pkgs ags; };

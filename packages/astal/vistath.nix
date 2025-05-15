@@ -4,7 +4,7 @@
 }:
 ags.lib.bundle {
   inherit pkgs;
-  name = "vistath-astal";
+  name = "astal";
   entry = "app.ts";
   gtk4 = false;
 
