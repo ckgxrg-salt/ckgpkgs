@@ -13,9 +13,7 @@ with pkgs;
   # Astal
   astal = {
     daywatch = import ./astal/daywatch.nix { inherit pkgs ags; };
-    daywatch-logout = import ./astal/daywatch-logout.nix { inherit pkgs ags; };
     vistath = import ./astal/vistath.nix { inherit pkgs ags; };
-    vistath-logout = import ./astal/vistath-logout.nix { inherit pkgs ags; };
   };
 
   # GTK & Qt themes
