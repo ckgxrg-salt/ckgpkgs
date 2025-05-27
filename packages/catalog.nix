@@ -27,6 +27,7 @@ with pkgs;
   ch57x-keyboard-tool = callPackage ./ch57x-keyboard-tool.nix { };
   fyrox-template = callPackage ./fyrox-template.nix { };
   lxwengd = callPackage ./lxwengd.nix { };
+  alumnimap = callPackage ./alumnimap.nix { };
   show-my-osk = callPackage ./show-my-osk.nix { };
   commet-chat = callPackage ./commet-chat { };
 }
