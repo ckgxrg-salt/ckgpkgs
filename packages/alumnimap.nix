@@ -15,10 +15,10 @@ rustPlatform.buildRustPackage {
   src = fetchFromGitHub {
     owner = "ckgxrg-salt";
     repo = "AlumniMap";
-    rev = "ea45d3e0188305b080eeac4d1c7926802ad64ef3";
-    hash = "sha256-fbGH0K1uf9Y67qmh0aaFuFDvXiAq8W0WZC+C6hesz70=";
+    rev = "c9ba6def44d7c119b4ebf00c5085010db55cfa16";
+    hash = "sha256-nVYVvg50tW5q/KrHM00XY1MMGnutcKwaimGoS4SKHBw=";
   };
-  cargoHash = "sha256-0cGdMtdlPHFyU9V3FC8t4cJemD1Q58VfU3LjDg6fLRU=";
+  cargoHash = "sha256-Ggd81I5wpHbBFgYroZVIPSfp0Vqgb9vK/0b9MTp+CD0=";
 
   nativeBuildInputs = [
     trunk
