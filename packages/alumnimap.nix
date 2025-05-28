@@ -10,13 +10,13 @@
 }:
 rustPlatform.buildRustPackage rec {
   pname = "alumnimap";
-  version = "1.1.0";
+  version = "1.1.1";
 
   src = fetchFromGitHub {
     owner = "ckgxrg-salt";
     repo = "AlumniMap";
     rev = version;
-    hash = "sha256-zgft9vosPVrFN9lOEKBxjRFtrhdD20utDEIMbKzcT4A=";
+    hash = "sha256-BLoWF4Xj8zMXKMW7uqFNynBq6fh2XQdDNcIZMXTtLzE=";
   };
   cargoHash = "sha256-mqB4teLIDCn8cTO17IEQ9bJ+cwDytiXXFmq2qUadi+A=";
 
