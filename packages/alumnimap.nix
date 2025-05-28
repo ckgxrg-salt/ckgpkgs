@@ -8,17 +8,17 @@
   llvmPackages,
   ...
 }:
-rustPlatform.buildRustPackage {
+rustPlatform.buildRustPackage rec {
   pname = "alumnimap";
-  version = "1.0.0";
+  version = "1.1.0";
 
   src = fetchFromGitHub {
     owner = "ckgxrg-salt";
     repo = "AlumniMap";
-    rev = "c9ba6def44d7c119b4ebf00c5085010db55cfa16";
-    hash = "sha256-nVYVvg50tW5q/KrHM00XY1MMGnutcKwaimGoS4SKHBw=";
+    rev = version;
+    hash = "sha256-zgft9vosPVrFN9lOEKBxjRFtrhdD20utDEIMbKzcT4A=";
   };
-  cargoHash = "sha256-Ggd81I5wpHbBFgYroZVIPSfp0Vqgb9vK/0b9MTp+CD0=";
+  cargoHash = "sha256-mqB4teLIDCn8cTO17IEQ9bJ+cwDytiXXFmq2qUadi+A=";
 
   nativeBuildInputs = [
     trunk
