@@ -26,7 +26,6 @@ with pkgs;
   # Services
   alumnimap = callPackage ./welkin/alumnimap.nix { };
   matrix-qq = callPackage ./welkin/matrix-qq.nix { };
-  auto-mcs = callPackage ./welkin/auto-mcs.nix { };
 
   # Misc
   ch57x-keyboard-tool = callPackage ./ch57x-keyboard-tool.nix { };
