@@ -23,11 +23,15 @@ with pkgs;
   marge-kvantum-theme = callPackage ./theming/marge-kvantum.nix { };
   moe-kvantum-theme = callPackage ./theming/moe-kvantum.nix { };
 
+  # Services
+  alumnimap = callPackage ./welkin/alumnimap.nix { };
+  matrix-qq = callPackage ./welkin/matrix-qq.nix { };
+  auto-mcs = callPackage ./welkin/auto-mcs.nix { };
+
   # Misc
   ch57x-keyboard-tool = callPackage ./ch57x-keyboard-tool.nix { };
   fyrox-template = callPackage ./fyrox-template.nix { };
   lxwengd = callPackage ./lxwengd.nix { };
-  alumnimap = callPackage ./alumnimap.nix { };
   show-my-osk = callPackage ./show-my-osk.nix { };
   commet-chat = callPackage ./commet-chat { };
 }
