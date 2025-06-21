@@ -14,6 +14,7 @@ with pkgs;
   astal = {
     daywatch = import ./astal/daywatch.nix { inherit pkgs ags; };
     vistath = import ./astal/vistath.nix { inherit pkgs ags; };
+    asedia = callPackage ./astal/asedia.nix { inherit ags; };
   };
 
   # GTK & Qt themes
