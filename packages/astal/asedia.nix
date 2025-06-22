@@ -15,8 +15,8 @@ stdenvNoCC.mkDerivation {
   src = fetchFromGitHub {
     owner = "ckgxrg-salt";
     repo = "asedia-astal";
-    rev = "ce5a7cc2066f807a6153cac24651300abe514f5d";
-    hash = "sha256-JWkMlY8YT3RXYJwcauO867l+ytCHbkHux9NiYVRG5BY=";
+    rev = "a51642e8d7dafb9d328646686d3985c027244786";
+    hash = "sha256-AfYDTMv2vmepFh+JBZQ73Bw9HhQ2CcqNQ+5JOVJxXGg=";
   };
 
   nativeBuildInputs = [
