@@ -6,7 +6,7 @@ with pkgs;
   googledot-cursor = callPackage ./theming/googledot-cursor.nix { };
   nu-scripts = callPackage ./theming/nu-scripts.nix { };
   vivid-icons = callPackage ./theming/vivid-icons.nix { };
-  wvkbd-vistath = callPackage ./wvkbd-vistath.nix { };
+  wvkbd = callPackage ./wvkbd.nix { };
   rofi-themes = callPackage ./theming/rofi-themes.nix { };
   maple-ui = callPackage ./theming/maple-ui.nix { };
 
