@@ -15,7 +15,6 @@ rustPlatform.buildRustPackage {
     hash = "sha256-3kBG15g96z+whx1TLofHu5m1Eqdja8dF4UP5weVnqiE=";
   };
   cargoHash = "sha256-KClloDrShUiYjMkDljPYknJ9uGi0nu9nIXZ5vPwrrmc=";
-  useFetchCargoVendor = true;
 
   meta = {
     description = "A daemon that adds playlists to linux-wallpaperengine";
