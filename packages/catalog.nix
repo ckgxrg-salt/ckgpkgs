@@ -8,7 +8,6 @@ with pkgs;
   vivid-icons = callPackage ./theming/vivid-icons.nix { };
   wvkbd = callPackage ./wvkbd.nix { };
   rofi-themes = callPackage ./theming/rofi-themes.nix { };
-  maple-ui = callPackage ./theming/maple-ui.nix { };
 
   # Astal
   astal = {
@@ -31,7 +30,6 @@ with pkgs;
 
   # Misc
   ch57x-keyboard-tool = callPackage ./ch57x-keyboard-tool.nix { };
-  fyrox-template = callPackage ./fyrox-template.nix { };
   lxwengd = callPackage ./lxwengd.nix { };
   show-my-osk = callPackage ./show-my-osk.nix { };
   commet-chat = callPackage ./commet-chat { };
