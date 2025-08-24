@@ -29,6 +29,7 @@ with pkgs;
   postmoogle = callPackage ./welkin/postmoogle.nix { };
 
   # Misc
+  deltapatcher = callPackage ./deltapatcher.nix { };
   ch57x-keyboard-tool = callPackage ./ch57x-keyboard-tool.nix { };
   lxwengd = callPackage ./lxwengd.nix { };
   show-my-osk = callPackage ./show-my-osk.nix { };
