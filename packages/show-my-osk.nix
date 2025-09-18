@@ -1,10 +1,11 @@
 {
   fetchFromGitHub,
   lib,
-  hyprland,
   hyprlandPlugins,
+  meson,
+  ninja,
 }:
-hyprlandPlugins.mkHyprlandPlugin hyprland {
+hyprlandPlugins.mkHyprlandPlugin {
   pluginName = "show-my-osk";
   version = "0.1";
 
@@ -15,7 +16,10 @@ hyprlandPlugins.mkHyprlandPlugin hyprland {
     hash = "sha256-q+sathe7UInyCi0ROBLbymO3Mq1EcfStwL82MurKywk=";
   };
 
-  inherit (hyprland) nativeBuildInputs;
+  nativeBuildInputs = [
+    meson
+    ninja
+  ];
 
   meta = with lib; {
     homepage = "https://github.com/ckgxrg-salt/show-my-osk";
