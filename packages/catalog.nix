@@ -16,6 +16,13 @@ with pkgs;
     asedia = callPackage ./astal/asedia.nix { inherit ags; };
   };
 
+  # Neovim plugins
+  nvim = {
+    possession-nvim = callPackage ./neovim/possession-nvim.nix {
+      inherit (pkgs.vimUtils) buildVimPlugin;
+    };
+  };
+
   # GTK & Qt themes
   otis-gtk-theme = callPackage ./theming/otis-gtk.nix { };
   squared-gtk-theme = callPackage ./theming/squared-gtk.nix { };
