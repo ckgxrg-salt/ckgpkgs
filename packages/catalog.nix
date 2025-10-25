@@ -21,6 +21,9 @@ with pkgs;
     possession-nvim = callPackage ./neovim/possession-nvim.nix {
       inherit (pkgs.vimUtils) buildVimPlugin;
     };
+    neovim-tips = callPackage ./neovim/neovim-tips.nix {
+      inherit (pkgs.vimUtils) buildVimPlugin;
+    };
   };
 
   # GTK & Qt themes
