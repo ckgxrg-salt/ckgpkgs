@@ -20,6 +20,7 @@ with pkgs;
   nvim = with pkgs.vimUtils; {
     neovim-tips = callPackage ./neovim/neovim-tips.nix { inherit buildVimPlugin; };
     im-select-nvim = callPackage ./neovim/im-select-nvim.nix { inherit buildVimPlugin; };
+    pick-resession-nvim = callPackage ./neovim/pick-resession-nvim.nix { inherit buildVimPlugin; };
   };
 
   # GTK & Qt themes

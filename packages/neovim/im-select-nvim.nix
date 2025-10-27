@@ -4,7 +4,7 @@
   lib,
 }:
 buildVimPlugin {
-  pname = "im-select";
+  pname = "im-select.nvim";
   version = "2025-07-24";
   src = fetchurl {
     url = "https://github.com/keaising/im-select.nvim/archive/113a6905a1c95d2990269f96abcbad9718209557.tar.gz";
