@@ -18,7 +18,6 @@ with pkgs;
 
   # Neovim plugins
   nvim = with pkgs.vimUtils; {
-    possession-nvim = callPackage ./neovim/possession-nvim.nix { inherit buildVimPlugin; };
     neovim-tips = callPackage ./neovim/neovim-tips.nix { inherit buildVimPlugin; };
     im-select-nvim = callPackage ./neovim/im-select-nvim.nix { inherit buildVimPlugin; };
   };
