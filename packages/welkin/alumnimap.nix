@@ -3,7 +3,7 @@
   fetchFromGitHub,
   lib,
   trunk,
-  wasm-bindgen-cli,
+  wasm-bindgen-cli_0_2_100,
   binaryen,
   llvmPackages,
   ...
@@ -23,7 +23,7 @@ rustPlatform.buildRustPackage rec {
   nativeBuildInputs = [
     trunk
     binaryen
-    wasm-bindgen-cli
+    wasm-bindgen-cli_0_2_100
     llvmPackages.bintools
   ];
 
