@@ -1,7 +1,7 @@
 {
   stdenvNoCC,
   fetchFromGitHub,
-  wrapGAppsHook,
+  wrapGAppsHook3,
   gobject-introspection,
   ags,
   glib,
@@ -20,7 +20,7 @@ stdenvNoCC.mkDerivation {
   };
 
   nativeBuildInputs = [
-    wrapGAppsHook
+    wrapGAppsHook3
     gobject-introspection
     ags.packages."x86_64-linux".default
   ];

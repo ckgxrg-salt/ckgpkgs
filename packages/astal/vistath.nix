@@ -17,7 +17,7 @@ in
     entry = "app.ts";
     gtk4 = false;
 
-    extraPackages = with ags.packages.${pkgs.system}; [
+    extraPackages = with ags.packages."x86_64-linux"; [
       astal3
       io
       apps
@@ -36,7 +36,7 @@ in
     entry = "logout/logout.ts";
     gtk4 = false;
 
-    extraPackages = with ags.packages.${pkgs.system}; [
+    extraPackages = with ags.packages."x86_64-linux"; [
       astal3
       io
       hyprland

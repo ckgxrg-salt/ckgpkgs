@@ -3,7 +3,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     ags = {
-      url = "github:aylur/ags/v3";
+      url = "github:aylur/ags";
       inputs.astal.follows = "astal";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -31,7 +31,7 @@
     in
     {
       # The packages
-      packages.${pkgs.system} = import ./packages/catalog.nix { inherit pkgs ags; };
+      packages.${system} = import ./packages/catalog.nix { inherit pkgs ags; };
 
       devShell.${system} = pkgs.mkShellNoCC {
         name = "ckgpkgs";
