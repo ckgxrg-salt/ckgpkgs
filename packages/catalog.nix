@@ -41,4 +41,5 @@ with pkgs;
   lxwengd = callPackage ./lxwengd.nix { };
   show-my-osk = callPackage ./show-my-osk.nix { };
   commet-chat = callPackage ./commet-chat { };
+  polycule = callPackage ./polycule { };
 }
