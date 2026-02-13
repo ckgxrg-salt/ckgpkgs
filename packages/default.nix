@@ -2,14 +2,6 @@
 # All packages
 with pkgs;
 {
-  alacritty-themes = callPackage ./theming/alacritty-themes.nix { };
-  googledot-cursor = callPackage ./theming/googledot-cursor.nix { };
-  nu-scripts = callPackage ./theming/nu-scripts.nix { };
-  vivid-icons = callPackage ./theming/vivid-icons.nix { };
-  wvkbd = callPackage ./wvkbd.nix { };
-  rofi-themes = callPackage ./theming/rofi-themes.nix { };
-  line-seed = callPackage ./line-seed.nix { };
-
   # Astal
   astal = {
     daywatch = import ./astal/daywatch.nix { inherit pkgs ags; };
@@ -24,23 +16,17 @@ with pkgs;
     pick-resession-nvim = callPackage ./neovim/pick-resession-nvim.nix { inherit buildVimPlugin; };
   };
 
-  # GTK & Qt themes
-  otis-gtk-theme = callPackage ./theming/otis-gtk.nix { };
-  squared-gtk-theme = callPackage ./theming/squared-gtk.nix { };
-  space-gtk-theme = callPackage ./theming/space-gtk.nix { };
-  marge-kvantum-theme = callPackage ./theming/marge-kvantum.nix { };
-  moe-kvantum-theme = callPackage ./theming/moe-kvantum.nix { };
-
   # Services
   alumnimap = callPackage ./welkin/alumnimap.nix { };
   matrix-qq = callPackage ./welkin/matrix-qq.nix { };
   postmoogle = callPackage ./welkin/postmoogle.nix { };
 
   # Misc
+  line-seed = callPackage ./line-seed.nix { };
   deltapatcher = callPackage ./deltapatcher.nix { };
-  ch57x-keyboard-tool = callPackage ./ch57x-keyboard-tool.nix { };
   lxwengd = callPackage ./lxwengd.nix { };
   show-my-osk = callPackage ./show-my-osk.nix { };
   commet-chat = callPackage ./commet-chat { };
   polycule = callPackage ./polycule { };
+  wvkbd = callPackage ./wvkbd.nix { };
 }

@@ -30,19 +30,10 @@
       };
     in
     {
-      # The packages
-      packages.${system} = import ./packages/catalog.nix { inherit pkgs ags; };
+      packages.${system} = import ./packages { inherit pkgs ags; };
 
       devShell.${system} = pkgs.mkShellNoCC {
         name = "ckgpkgs";
-
-        buildInputs = with pkgs; [
-          nixfmt-rfc-style
-          deadnix
-        ];
       };
-
-      # Support nix fmt command
-      formatter.${system} = pkgs.nixfmt-rfc-style;
     };
 }
