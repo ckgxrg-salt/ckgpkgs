@@ -14,12 +14,7 @@ let
     name = "LINE_Seed_JP";
     hash = "sha256-zLEUl9EpiXT9iZDSN3gH8spLrQwWWPxSX35+ZRtGxA8=";
   };
-  tw = fetchzip {
-    url = "https://seed.line.me/src/images/fonts/LINE_Seed_TW.zip";
-    name = "LINE_Seed_TW";
-    hash = "sha256-nuY5CLtm7yg39eYeHqxny9zXIPvKOLGqF6VM2aoNTX4=";
-    stripRoot = false;
-  };
+
 in
 stdenvNoCC.mkDerivation {
   pname = "line-seed";
@@ -28,7 +23,6 @@ stdenvNoCC.mkDerivation {
   srcs = [
     en
     jp
-    tw
   ];
   sourceRoot = ".";
 
@@ -45,11 +39,6 @@ stdenvNoCC.mkDerivation {
     install -Dm644 ${jp}/Desktop/OTF/LINESeedJP_OTF_Eb.otf $out/share/fonts/line-seed
     install -Dm644 ${jp}/Desktop/OTF/LINESeedJP_OTF_Rg.otf $out/share/fonts/line-seed
     install -Dm644 ${jp}/Desktop/OTF/LINESeedJP_OTF_Th.otf $out/share/fonts/line-seed
-
-    install -Dm644 ${tw}/LINE\ Seed\ TW_ver02/OTF/LINESeedTW_OTF_Bd.otf $out/share/fonts/line-seed
-    install -Dm644 ${tw}/LINE\ Seed\ TW_ver02/OTF/LINESeedTW_OTF_Eb.otf $out/share/fonts/line-seed
-    install -Dm644 ${tw}/LINE\ Seed\ TW_ver02/OTF/LINESeedTW_OTF_Rg.otf $out/share/fonts/line-seed
-    install -Dm644 ${tw}/LINE\ Seed\ TW_ver02/OTF/LINESeedTW_OTF_Th.otf $out/share/fonts/line-seed
   '';
 
   meta = with lib; {
