@@ -8,6 +8,7 @@ with pkgs;
   vivid-icons = callPackage ./theming/vivid-icons.nix { };
   wvkbd = callPackage ./wvkbd.nix { };
   rofi-themes = callPackage ./theming/rofi-themes.nix { };
+  line-seed = callPackage ./line-seed.nix { };
 
   # Astal
   astal = {
