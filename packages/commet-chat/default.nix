@@ -1,21 +1,38 @@
 {
   lib,
-  flutter324,
+  flutter,
+  stdenv,
   fetchFromGitHub,
+  fetchzip,
+
+  pkg-config,
   libunwind,
   libdovi,
-  pkg-config,
   mpv-unwrapped,
+  webkitgtk_4_1,
+  libgbm,
+  libdrm,
 }:
-flutter324.buildFlutterApplication rec {
+
+let
+  libwebrtcRpath = lib.makeLibraryPath [
+    libgbm
+    libdrm
+  ];
+  libwebrtc = fetchzip {
+    url = "https://github.com/flutter-webrtc/flutter-webrtc/releases/download/v1.1.0/libwebrtc.zip";
+    sha256 = "sha256-lRfymTSfoNUtR5tSUiAptAvrrTwbB8p+SaYQeOevMzA=";
+  };
+in
+flutter.buildFlutterApplication rec {
   pname = "commet-chat";
-  version = "0.3.1+hotfix.1";
+  version = "0.4.0";
 
   src = fetchFromGitHub {
     owner = "commetchat";
     repo = "commet";
     rev = "v${version}";
-    hash = "sha256-FJRmEiov21Sm+OHrJdZ59MHanqq7hxsPBhMFwlEBK50=";
+    hash = "sha256-rXUUyHhBO7onKyZ04h7nG+FV1M/0Q+zLAMjo8RhD4g8=";
     fetchSubmodules = true;
   };
   strictDeps = true;
@@ -24,14 +41,18 @@ flutter324.buildFlutterApplication rec {
   pubspecLock = lib.importJSON ./pubspec.lock.json;
 
   gitHashes = {
+    calendar_view = "sha256-tGAMK89VsgqfKQy+t8x5zl6dbQEf5h4HxSUR8crB1oM=";
+    desktop_webview_window = "sha256-EOh5QoOuAxiYn0IcdxY7taN2Twu8GshY9zAoGCztPnA=";
     dynamic_color = "sha256-4zSTiXplkBjtPtzssj3VaHTVo9YlYKNTMLgBIM5MMe4=";
     flutter_highlighter = "sha256-Y84Besir3gu1RnQt9YoE0GyIJLLZ6H0Kki/Wf6z6QMg=";
-    flutter_html = "sha256-6c/8aaQPxNJZI9pDWixnKlWrwRE3zn2e+HMmvahUKbQ=";
-    flutter_local_notifications = "sha256-hUKadVrGaU3fY09Uefm7qmkVt1DLaGvvnKtDhpFn1Lk=";
-    flutter_shortcuts = "sha256-WxjBK3Pg3plthkzY6hyAvvy8HoHPVmtVQ2Zd7LfjIpM=";
-    matrix = "sha256-YKY6JdHbWAc8cxpAkOJEDapO99KP5pWND2UzUFL0O7c=";
-    matrix_dart_sdk_drift_db = "sha256-aSOtPGXPsyarK5SB6iwpUpB5jLUS/NAGLNPuiKoya4s=";
-    signal_sticker_api = "sha256-kA/yUIGwpPjgVJw1gVaZf4vJwvg0Y1Zl56m+qYdrW3U=";
+    flutter_html = "sha256-576KYoYB4sZeavcAS8V5rjDG9hezYlN2Q4zlyvBOouw=";
+    flutter_local_notifications = "sha256-AgvvFoJgos/gsTwcLGX/CxbHauWiH3OHksqtF0Dauuw=";
+    flutter_local_notifications_linux = "sha256-AgvvFoJgos/gsTwcLGX/CxbHauWiH3OHksqtF0Dauuw=";
+    markdown = "sha256-2rEMNJM9Vy7LrFLt30/Z3pyqERTYJei9D3mgOAAvVPg=";
+    matrix = "sha256-YrArfC9AMWzFYcFkeWJMeFgIo1bJbmkTbeZfcYYA1zA=";
+    matrix_dart_sdk_drift_db = "sha256-t4a61O0nk9We0s4+cQB30H05giKi8IE3srPza57Ii94=";
+    receive_intent = "sha256-wGIOZRH4O3a44I8zG5Q1hCwn4SMuTWB7i9wtGSLZWeQ=";
+    signal_sticker_api = "sha256-VdEE3Bt8gpfUpxxYSz5319YEL49Eh+loO+ZipI1DoyA=";
     starfield = "sha256-ebVRyVkyLfHCC6EBmx5evXL1U71S3tgCMo1yLWlIcw4=";
   };
 
@@ -42,7 +63,34 @@ flutter324.buildFlutterApplication rec {
     mpv-unwrapped
     libunwind
     libdovi
-  ] ++ mpv-unwrapped.buildInputs;
+    webkitgtk_4_1
+  ];
+
+  env.NIX_LDFLAGS = "-rpath-link ${libwebrtcRpath}";
+  customSourceBuilders = {
+    flutter_webrtc =
+      { version, src, ... }:
+      stdenv.mkDerivation {
+        pname = "flutter_webrtc";
+        inherit version src;
+        inherit (src) passthru;
+
+        postPatch = ''
+          substituteInPlace third_party/CMakeLists.txt \
+            --replace-fail "\''${CMAKE_CURRENT_LIST_DIR}/downloads/libwebrtc.zip" ${libwebrtc}
+            ln -s ${libwebrtc} third_party/libwebrtc
+        '';
+
+        installPhase = ''
+          runHook preInstall
+
+          mkdir $out
+          cp -r ./* $out/
+
+          runHook postInstall
+        '';
+      };
+  };
 
   # The original codegen.dart hardcodes flutter calls inside, so the patch basically rewrites the codegen script forcing nix.
   patches = [
@@ -56,17 +104,12 @@ flutter324.buildFlutterApplication rec {
       --translations-list-file /build/source/commet/lib/generated/l10n/arb_list_file.txt \
       --output-dir=lib/generated/l10n
 
-    mkdir -p .dart_tool/flutter_gen
-    echo "dependencies:" > .dart_tool/flutter_gen/pubspec.yaml
-    packageRun build_runner build
+    packageRun build_runner build --delete-conflicting-outputs
   '';
 
   flutterBuildFlags = [
-    "--release"
-    "--dart-define"
-    "BUILD_MODE=release"
-    "--dart-define"
-    "PLATFORM=linux"
+    "--dart-define=BUILD_MODE=release"
+    "--dart-define=PLATFORM=linux"
   ];
 
   postInstall = ''

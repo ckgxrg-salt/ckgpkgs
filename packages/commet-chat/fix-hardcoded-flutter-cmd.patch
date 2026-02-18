@@ -1,6 +1,6 @@
 --- a/scripts/codegen.dart
 +++ b/scripts/codegen.dart
-@@ -2,37 +2,6 @@
+@@ -2,38 +2,7 @@
 
  import 'dart:io';
 
@@ -35,13 +35,19 @@
 -  return process;
 -}
 -
- Future<List<File>> generateFileLists() async {
+-Future<List<File>> generateFileLists() async {
++void main() async {
    var dir = Directory("lib/generated/l10n");
    if (!dir.existsSync()) {
-@@ -86,63 +55,6 @@
-   return [sourcesFile, arbFile];
- }
+     dir.create(recursive: true);
+@@ -82,68 +51,4 @@
 
+   await arbFile.create(recursive: true);
+   arbFile.writeAsStringSync(fileList);
+-
+-  return [sourcesFile, arbFile];
+-}
+-
 -Future<ProcessResult> generateFromArb(List<File> files) async {
 -  var process = await Process.run(
 -    "flutter",
@@ -71,6 +77,7 @@
 -      "run",
 -      "build_runner",
 -      "build",
+-      "--delete-conflicting-outputs",
 -    ],
 -    runInShell: true,
 -  );
@@ -80,7 +87,7 @@
 -  return process;
 -}
 -
- void main() async {
+-void main() async {
 -  var result = await getDependencies();
 -  if (result.exitCode != 0) {
 -    exit(result.exitCode);
@@ -91,7 +98,7 @@
 -    exit(result.exitCode);
 -  }
 -
-   var files = await generateFileLists();
+-  var files = await generateFileLists();
 -  result = await generateFromArb(files);
 -  if (result.exitCode != 0) {
 -    exit(result.exitCode);
