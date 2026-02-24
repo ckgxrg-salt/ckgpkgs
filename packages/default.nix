@@ -24,6 +24,7 @@ with pkgs;
   # Fonts
   line-seed = callPackage ./fonts/line-seed.nix { };
   agu-display = callPackage ./fonts/agu-display.nix { };
+  lxgw-marker-gothic = callPackage ./fonts/lxgw-marker-gothic.nix { };
   deltapatcher = callPackage ./deltapatcher.nix { };
   lxwengd = callPackage ./lxwengd.nix { };
   show-my-osk = callPackage ./show-my-osk.nix { };
