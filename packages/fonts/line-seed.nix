@@ -27,18 +27,18 @@ stdenvNoCC.mkDerivation {
   sourceRoot = ".";
 
   installPhase = ''
-    mkdir -p $out/share/fonts/line-seed
+    mkdir -p $out/share/fonts/opentype
 
-    install -Dm644 ${en}/Desktop/OTF/LINESeedSans_Bd.otf $out/share/fonts/line-seed
-    install -Dm644 ${en}/Desktop/OTF/LINESeedSans_He.otf $out/share/fonts/line-seed
-    install -Dm644 ${en}/Desktop/OTF/LINESeedSans_Rg.otf $out/share/fonts/line-seed
-    install -Dm644 ${en}/Desktop/OTF/LINESeedSans_Th.otf $out/share/fonts/line-seed
-    install -Dm644 ${en}/Desktop/OTF/LINESeedSans_XBd.otf $out/share/fonts/line-seed
+    install -Dm644 ${en}/Desktop/OTF/LINESeedSans_Bd.otf $out/share/fonts/opentype
+    install -Dm644 ${en}/Desktop/OTF/LINESeedSans_He.otf $out/share/fonts/opentype
+    install -Dm644 ${en}/Desktop/OTF/LINESeedSans_Rg.otf $out/share/fonts/opentype
+    install -Dm644 ${en}/Desktop/OTF/LINESeedSans_Th.otf $out/share/fonts/opentype
+    install -Dm644 ${en}/Desktop/OTF/LINESeedSans_XBd.otf $out/share/fonts/opentype
 
-    install -Dm644 ${jp}/Desktop/OTF/LINESeedJP_OTF_Bd.otf $out/share/fonts/line-seed
-    install -Dm644 ${jp}/Desktop/OTF/LINESeedJP_OTF_Eb.otf $out/share/fonts/line-seed
-    install -Dm644 ${jp}/Desktop/OTF/LINESeedJP_OTF_Rg.otf $out/share/fonts/line-seed
-    install -Dm644 ${jp}/Desktop/OTF/LINESeedJP_OTF_Th.otf $out/share/fonts/line-seed
+    install -Dm644 ${jp}/Desktop/OTF/LINESeedJP_OTF_Bd.otf $out/share/fonts/opentype
+    install -Dm644 ${jp}/Desktop/OTF/LINESeedJP_OTF_Eb.otf $out/share/fonts/opentype
+    install -Dm644 ${jp}/Desktop/OTF/LINESeedJP_OTF_Rg.otf $out/share/fonts/opentype
+    install -Dm644 ${jp}/Desktop/OTF/LINESeedJP_OTF_Th.otf $out/share/fonts/opentype
   '';
 
   meta = with lib; {

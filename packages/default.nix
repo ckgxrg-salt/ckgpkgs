@@ -21,8 +21,9 @@ with pkgs;
   matrix-qq = callPackage ./welkin/matrix-qq.nix { };
   postmoogle = callPackage ./welkin/postmoogle.nix { };
 
-  # Misc
-  line-seed = callPackage ./line-seed.nix { };
+  # Fonts
+  line-seed = callPackage ./fonts/line-seed.nix { };
+  agu-display = callPackage ./fonts/agu-display.nix { };
   deltapatcher = callPackage ./deltapatcher.nix { };
   lxwengd = callPackage ./lxwengd.nix { };
   show-my-osk = callPackage ./show-my-osk.nix { };
