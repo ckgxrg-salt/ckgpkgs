@@ -1,15 +1,19 @@
 {
   lib,
-  flutter,
+  flutter341,
   stdenv,
   fetchFromGitHub,
   fetchzip,
 
   pkg-config,
-  libunwind,
-  libdovi,
-  mpv-unwrapped,
   webkitgtk_4_1,
+  mimalloc,
+
+  mpv-unwrapped,
+  libdovi,
+  libdvdcss,
+  libunwind,
+
   libgbm,
   libdrm,
 }:
@@ -24,14 +28,16 @@ let
     sha256 = "sha256-lRfymTSfoNUtR5tSUiAptAvrrTwbB8p+SaYQeOevMzA=";
   };
 in
-flutter.buildFlutterApplication rec {
+flutter341.buildFlutterApplication rec {
   pname = "commet-chat";
   version = "0.4.0";
+  # Needed because of the build flag
+  rev = "c8ea124";
 
   src = fetchFromGitHub {
     owner = "commetchat";
     repo = "commet";
-    rev = "v${version}";
+    inherit rev;
     hash = "sha256-rXUUyHhBO7onKyZ04h7nG+FV1M/0Q+zLAMjo8RhD4g8=";
     fetchSubmodules = true;
   };
@@ -56,17 +62,25 @@ flutter.buildFlutterApplication rec {
     starfield = "sha256-ebVRyVkyLfHCC6EBmx5evXL1U71S3tgCMo1yLWlIcw4=";
   };
 
-  nativeBuildInput = [
+  nativeBuildInputs = [
     pkg-config
   ];
   buildInputs = [
-    mpv-unwrapped
-    libunwind
-    libdovi
     webkitgtk_4_1
-  ];
+    mimalloc
+
+    mpv-unwrapped
+    libdovi
+    libdvdcss
+    libunwind
+  ]
+  ++ mpv-unwrapped.buildInputs;
 
   env.NIX_LDFLAGS = "-rpath-link ${libwebrtcRpath}";
+  env.COMMET_PROD = 1;
+
+  targetFlutterPlatform = "linux";
+
   customSourceBuilders = {
     flutter_webrtc =
       { version, src, ... }:
@@ -96,6 +110,16 @@ flutter.buildFlutterApplication rec {
   patches = [
     ./fix-hardcoded-flutter-cmd.patch
   ];
+
+  flutterBuildFlags = [
+    "--release"
+    "--dart-define=BUILD_MODE=release"
+    "--dart-define=PLATFORM=linux"
+    "--dart-define=VERSION_TAG=v${version}"
+    "--dart-define=GIT_HASH=${rev}"
+    "--dart-define=BUILD_DETAIL=linux-x64"
+  ];
+
   preBuild = ''
     packageRun intl_utils -e generate
     dart run --packages=.dart_tool/package_config.json scripts/codegen.dart
@@ -103,14 +127,8 @@ flutter.buildFlutterApplication rec {
       --sources-list-file /build/source/commet/lib/generated/l10n/sources_list_file.txt \
       --translations-list-file /build/source/commet/lib/generated/l10n/arb_list_file.txt \
       --output-dir=lib/generated/l10n
-
     packageRun build_runner build --delete-conflicting-outputs
   '';
-
-  flutterBuildFlags = [
-    "--dart-define=BUILD_MODE=release"
-    "--dart-define=PLATFORM=linux"
-  ];
 
   postInstall = ''
     mkdir -p $out/share/applications
@@ -122,13 +140,16 @@ flutter.buildFlutterApplication rec {
 
     mkdir -p $out/share/icons
     cp -r linux/debian/usr/share/icons/hicolor $out/share/icons/hicolor
+
+    patchelf --add-rpath ${libwebrtcRpath} $out/app/commet-chat/lib/libwebrtc.so
   '';
 
   meta = with lib; {
-    homepage = "https://github.com/commetchat/commet";
+    homepage = "https://commet.chat";
     description = "Your space to connect";
     platforms = platforms.linux;
     license = licenses.agpl3Only;
+    maintainers = with maintainers; [ ckgxrg ];
     mainProgram = "commet";
   };
 }
