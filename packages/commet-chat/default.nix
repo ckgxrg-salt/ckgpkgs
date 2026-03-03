@@ -4,6 +4,7 @@
   stdenv,
   fetchFromGitHub,
   fetchzip,
+  makeWrapper,
 
   pkg-config,
   webkitgtk_4_1,
@@ -57,13 +58,14 @@ flutter341.buildFlutterApplication rec {
     markdown = "sha256-2rEMNJM9Vy7LrFLt30/Z3pyqERTYJei9D3mgOAAvVPg=";
     matrix = "sha256-YrArfC9AMWzFYcFkeWJMeFgIo1bJbmkTbeZfcYYA1zA=";
     matrix_dart_sdk_drift_db = "sha256-t4a61O0nk9We0s4+cQB30H05giKi8IE3srPza57Ii94=";
-    receive_intent = "sha256-wGIOZRH4O3a44I8zG5Q1hCwn4SMuTWB7i9wtGSLZWeQ=";
+    receive_intent = "sha256-mXSxOXtDU1bwcuYz+pniJiGnYD4bxJUtMw1mq+OFRrY=";
     signal_sticker_api = "sha256-VdEE3Bt8gpfUpxxYSz5319YEL49Eh+loO+ZipI1DoyA=";
     starfield = "sha256-ebVRyVkyLfHCC6EBmx5evXL1U71S3tgCMo1yLWlIcw4=";
   };
 
   nativeBuildInputs = [
     pkg-config
+    makeWrapper
   ];
   buildInputs = [
     webkitgtk_4_1
@@ -142,14 +144,17 @@ flutter341.buildFlutterApplication rec {
     cp -r linux/debian/usr/share/icons/hicolor $out/share/icons/hicolor
 
     patchelf --add-rpath ${libwebrtcRpath} $out/app/commet-chat/lib/libwebrtc.so
+
+    wrapProgram $out/bin/commet \
+      --suffix LD_LIBRARY_PATH : "$out/app/commet-chat/lib"
   '';
 
-  meta = with lib; {
+  meta = {
     homepage = "https://commet.chat";
-    description = "Your space to connect";
-    platforms = platforms.linux;
-    license = licenses.agpl3Only;
-    maintainers = with maintainers; [ ckgxrg ];
+    description = "A client for Matrix focused on providing a feature rich experience while maintaining a simple interface";
+    platforms = lib.platforms.linux;
+    license = lib.licenses.agpl3Only;
+    maintainers = with lib.maintainers; [ ckgxrg ];
     mainProgram = "commet";
   };
 }
