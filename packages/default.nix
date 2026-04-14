@@ -14,6 +14,7 @@ with pkgs;
     neovim-tips = callPackage ./neovim/neovim-tips.nix { inherit buildVimPlugin; };
     im-select-nvim = callPackage ./neovim/im-select-nvim.nix { inherit buildVimPlugin; };
     pick-resession-nvim = callPackage ./neovim/pick-resession-nvim.nix { inherit buildVimPlugin; };
+    auto-indent-nvim = callPackage ./neovim/auto-indent-nvim.nix { inherit buildVimPlugin; };
   };
 
   # Services
