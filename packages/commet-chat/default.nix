@@ -4,11 +4,10 @@
   stdenv,
   fetchFromGitHub,
   fetchzip,
-  makeWrapper,
 
-  pkg-config,
   webkitgtk_4_1,
   mimalloc,
+  keybinder3,
 
   mpv-unwrapped,
   libdovi,
@@ -25,26 +24,33 @@ let
     libdrm
   ];
   libwebrtc = fetchzip {
-    url = "https://github.com/flutter-webrtc/flutter-webrtc/releases/download/v1.1.0/libwebrtc.zip";
-    sha256 = "sha256-lRfymTSfoNUtR5tSUiAptAvrrTwbB8p+SaYQeOevMzA=";
+    url = "https://github.com/flutter-webrtc/flutter-webrtc/releases/download/v1.2.0/libwebrtc.zip";
+    hash = "sha256-i4LRG44f//SDIOl072yZavkYoTZdiydPZndeOm6/fBM=";
   };
 in
-flutter341.buildFlutterApplication rec {
+flutter341.buildFlutterApplication (finalAttrs: {
   pname = "commet-chat";
-  version = "0.4.0";
-  # Needed because of the build flag
-  rev = "c8ea124";
+  version = "0.4.2+hotfix.2";
 
   src = fetchFromGitHub {
     owner = "commetchat";
     repo = "commet";
-    inherit rev;
-    hash = "sha256-rXUUyHhBO7onKyZ04h7nG+FV1M/0Q+zLAMjo8RhD4g8=";
+    tag = "v${finalAttrs.version}";
+    hash = "sha256-Pf+JeVuTPxpufcx/whn8RVcYp1e69CJBFzyZaQ8I5RQ=";
     fetchSubmodules = true;
+    leaveDotGit = true;
+
+    # For the git hash property in about page
+    postFetch = ''
+      cd $out
+      git rev-parse HEAD | head -c 7 > $out/GIT_HASH
+      find $out -name .git -print0 | xargs -0 rm -rf
+    '';
   };
   strictDeps = true;
-  sourceRoot = "${src.name}/commet";
+  sourceRoot = "${finalAttrs.src.name}/commet";
 
+  pubspecLockFilePath = "../pubspec.lock";
   pubspecLock = lib.importJSON ./pubspec.lock.json;
 
   gitHashes = {
@@ -56,20 +62,18 @@ flutter341.buildFlutterApplication rec {
     flutter_local_notifications = "sha256-AgvvFoJgos/gsTwcLGX/CxbHauWiH3OHksqtF0Dauuw=";
     flutter_local_notifications_linux = "sha256-AgvvFoJgos/gsTwcLGX/CxbHauWiH3OHksqtF0Dauuw=";
     markdown = "sha256-2rEMNJM9Vy7LrFLt30/Z3pyqERTYJei9D3mgOAAvVPg=";
-    matrix = "sha256-YrArfC9AMWzFYcFkeWJMeFgIo1bJbmkTbeZfcYYA1zA=";
-    matrix_dart_sdk_drift_db = "sha256-t4a61O0nk9We0s4+cQB30H05giKi8IE3srPza57Ii94=";
-    receive_intent = "sha256-mXSxOXtDU1bwcuYz+pniJiGnYD4bxJUtMw1mq+OFRrY=";
+    matrix = "sha256-PB7xjulxmV2jE0WGVG116T50BrT3G5LsdLreR1cJTPI=";
+    matrix_dart_sdk_drift_db = "sha256-2sSN2TcPAPVdEm3NXpZyWlPvArNn2CWnPph5Vz48KQ8=";
+    receive_intent = "sha256-wGIOZRH4O3a44I8zG5Q1hCwn4SMuTWB7i9wtGSLZWeQ=";
     signal_sticker_api = "sha256-VdEE3Bt8gpfUpxxYSz5319YEL49Eh+loO+ZipI1DoyA=";
     starfield = "sha256-ebVRyVkyLfHCC6EBmx5evXL1U71S3tgCMo1yLWlIcw4=";
+    launcher_entry = "sha256-T/zQRvY6jOKroMrhVwBtsoSm2xCFjOd5jsJC0PA4cpc=";
   };
 
-  nativeBuildInputs = [
-    pkg-config
-    makeWrapper
-  ];
   buildInputs = [
     webkitgtk_4_1
     mimalloc
+    keybinder3
 
     mpv-unwrapped
     libdovi
@@ -114,15 +118,15 @@ flutter341.buildFlutterApplication rec {
   ];
 
   flutterBuildFlags = [
-    "--release"
     "--dart-define=BUILD_MODE=release"
     "--dart-define=PLATFORM=linux"
-    "--dart-define=VERSION_TAG=v${version}"
-    "--dart-define=GIT_HASH=${rev}"
-    "--dart-define=BUILD_DETAIL=linux-x64"
+    "--dart-define=VERSION_TAG=v${finalAttrs.version}"
+    "--dart-define=BUILD_DETAIL=${stdenv.hostPlatform.system}"
   ];
 
   preBuild = ''
+    export flutterBuildFlags="$flutterBuildFlags --dart-define=GIT_HASH=$(cat ../GIT_HASH)"
+
     packageRun intl_utils -e generate
     dart run --packages=.dart_tool/package_config.json scripts/codegen.dart
     packageRun intl_translation -e generate_from_arb \
@@ -131,6 +135,8 @@ flutter341.buildFlutterApplication rec {
       --output-dir=lib/generated/l10n
     packageRun build_runner build --delete-conflicting-outputs
   '';
+
+  extraWrapProgramArgs = "--suffix LD_LIBRARY_PATH : $out/app/commet-chat/lib";
 
   postInstall = ''
     mkdir -p $out/share/applications
@@ -144,17 +150,15 @@ flutter341.buildFlutterApplication rec {
     cp -r linux/debian/usr/share/icons/hicolor $out/share/icons/hicolor
 
     patchelf --add-rpath ${libwebrtcRpath} $out/app/commet-chat/lib/libwebrtc.so
-
-    wrapProgram $out/bin/commet \
-      --suffix LD_LIBRARY_PATH : "$out/app/commet-chat/lib"
   '';
 
+  __structuredAttrs = true;
   meta = {
     homepage = "https://commet.chat";
-    description = "A client for Matrix focused on providing a feature rich experience while maintaining a simple interface";
+    description = "Client for Matrix focused on providing a feature rich experience while maintaining a simple interface";
     platforms = lib.platforms.linux;
     license = lib.licenses.agpl3Only;
     maintainers = with lib.maintainers; [ ckgxrg ];
     mainProgram = "commet";
   };
-}
+})
