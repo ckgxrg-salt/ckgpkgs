@@ -1,0 +1,18 @@
+--- a/cartridges/window.py
++++ b/cartridges/window.py
+@@ -162,7 +162,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
+
+             row.append(
+                 games_no_label := Gtk.Label(
+-                    label=games_no,
++                    label=str(games_no),
+                     hexpand=True,
+                     halign=Gtk.Align.END,
+                 )
+@@ -534,4 +534,4 @@ class CartridgesWindow(Adw.ApplicationWindow):
+             self.hidden_primary_menu_button.popup()
+
+     def on_close_action(self, *_args: Any) -> None:
+-        self.close()
+\ No newline at end of file
++        self.close()

@@ -34,4 +34,5 @@ with pkgs;
   commet-chat = callPackage ./commet-chat { };
   polycule = callPackage ./polycule { };
   wvkbd = callPackage ./wvkbd.nix { };
+  cartridges = callPackage ./cartridges { };
 }
