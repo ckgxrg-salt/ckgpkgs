@@ -35,4 +35,5 @@ with pkgs;
   polycule = callPackage ./polycule { };
   wvkbd = callPackage ./wvkbd.nix { };
   cartridges = callPackage ./cartridges { };
+  clashtui = callPackage ./clashtui.nix { };
 }
