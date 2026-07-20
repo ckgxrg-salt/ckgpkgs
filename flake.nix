@@ -2,20 +2,21 @@
   description = "ckgxrg's trivial NixOS packages";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    ags = {
-      url = "github:aylur/ags";
-      inputs.astal.follows = "astal";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     astal = {
       url = "github:aylur/astal";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    ags = {
+      url = "github:aylur/ags";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.astal.follows = "astal";
     };
   };
   outputs =
     {
       nixpkgs,
       ags,
+      astal,
       ...
     }:
     let
@@ -30,7 +31,7 @@
       };
     in
     {
-      packages.${system} = import ./packages { inherit pkgs ags; };
+      packages.${system} = import ./packages { inherit pkgs ags astal; };
 
       devShell.${system} = pkgs.mkShellNoCC {
         name = "ckgpkgs";

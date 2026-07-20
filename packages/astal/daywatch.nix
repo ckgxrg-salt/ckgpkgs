@@ -1,44 +1,50 @@
 {
-  pkgs,
+  stdenvNoCC,
+  fetchFromCodeberg,
+  wrapGAppsHook4,
+  gobject-introspection,
   ags,
+  astal,
+  glib,
+  gjs,
+  libgtop,
 }:
-let
-  src = pkgs.fetchFromGitHub {
-    owner = "ckgxrg-salt";
+stdenvNoCC.mkDerivation rec {
+  pname = "daywatch-astal";
+  version = "0.1.1";
+
+  src = fetchFromCodeberg {
+    owner = "ckgxrg";
     repo = "daywatch-astal";
-    rev = "6b3ce28618755a0fc777a1035a56f45ed2d56db1";
-    hash = "sha256-gc+hFQICGjtzqE68XNnFT2JUbNC9aG/XV++3cbzloaA=";
-  };
-in
-{
-  main = ags.lib.bundle {
-    inherit pkgs src;
-    name = "astal";
-    entry = "app.ts";
-    gtk4 = false;
-
-    extraPackages = with ags.packages."x86_64-linux"; [
-      astal3
-      io
-      hyprland
-      tray
-      mpris
-      wireplumber
-      battery
-      pkgs.libgtop
-    ];
+    rev = "v${version}";
+    hash = "sha256-iuYrWF7M7wMn7qBIc1DNJATI6FD2Wwp8yA9umoPdqVU=";
   };
 
-  logout = ags.lib.bundle {
-    inherit pkgs src;
-    name = "astal-logout";
-    entry = "logout/logout.ts";
-    gtk4 = false;
+  nativeBuildInputs = [
+    wrapGAppsHook4
+    gobject-introspection
+    ags.packages.${stdenvNoCC.system}.default
+  ];
 
-    extraPackages = with ags.packages."x86_64-linux"; [
-      astal3
-      io
-      hyprland
-    ];
-  };
+  buildInputs = [
+    glib
+    gjs
+    libgtop
+
+    astal.io
+    astal.astal4
+    astal.hyprland
+    astal.mpris
+    astal.apps
+    astal.tray
+    astal.battery
+  ];
+
+  installPhase = ''
+    mkdir -p $out/bin
+
+    ags bundle dashboard/app.ts $out/bin/astal-shell
+    ags bundle logout/app.ts $out/bin/astal-logout
+    ags bundle launchpad/app.ts $out/bin/astal-launchpad
+  '';
 }

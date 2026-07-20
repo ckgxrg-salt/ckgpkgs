@@ -1,12 +1,10 @@
-{ pkgs, ags }:
+{ pkgs, ags, astal }:
 # All packages
 with pkgs;
 {
   # Astal
   astal = {
-    daywatch = import ./astal/daywatch.nix { inherit pkgs ags; };
-    vistath = import ./astal/vistath.nix { inherit pkgs ags; };
-    asedia = callPackage ./astal/asedia.nix { inherit ags; };
+    daywatch = callPackage ./astal/daywatch.nix { inherit ags; };
   };
 
   # Neovim plugins
