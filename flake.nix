@@ -14,6 +14,7 @@
   };
   outputs =
     {
+      self,
       nixpkgs,
       ags,
       astal,
@@ -32,6 +33,12 @@
     in
     {
       packages.${system} = import ./packages { inherit pkgs ags astal; };
+
+      overlays.${system} = import ./overlays;
+      overlay-pkgs = import nixpkgs {
+        inherit system;
+        overlays = self.outputs.overlays.${system}.all;
+      };
 
       devShell.${system} = pkgs.mkShellNoCC {
         name = "ckgpkgs";
