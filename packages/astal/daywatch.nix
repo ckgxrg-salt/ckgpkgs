@@ -11,13 +11,13 @@
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "daywatch-astal";
-  version = "0.1.1";
+  version = "0.1.2";
 
   src = fetchFromCodeberg {
     owner = "ckgxrg";
     repo = "daywatch-astal";
     rev = "v${version}";
-    hash = "sha256-iuYrWF7M7wMn7qBIc1DNJATI6FD2Wwp8yA9umoPdqVU=";
+    hash = "sha256-dItnnHSNG2c24j2om7RKxfccJCMNFzDxgeYyx6ckHVM=";
   };
 
   nativeBuildInputs = [
