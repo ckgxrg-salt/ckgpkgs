@@ -1,15 +1,10 @@
 {
-  description = "ckgxrg's trivial NixOS packages";
+  description = "ckgxrg's miscellaneous Nix packages";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    astal = {
-      url = "github:aylur/astal";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     ags = {
       url = "github:aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.astal.follows = "astal";
     };
   };
   outputs =
@@ -17,7 +12,6 @@
       self,
       nixpkgs,
       ags,
-      astal,
       ...
     }:
     let
@@ -32,7 +26,7 @@
       };
     in
     {
-      packages.${system} = import ./packages { inherit pkgs ags astal; };
+      packages.${system} = import ./packages { inherit pkgs ags; };
 
       overlays.${system} = import ./overlays;
       overlay-pkgs = import nixpkgs {
