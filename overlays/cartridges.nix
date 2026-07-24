@@ -1,5 +1,5 @@
 final: prev: {
-  tuigreet = prev.tuigreet.overrideAttrs (
+  cartridges = prev.cartridges.overrideAttrs (
     finalAttrs: prevAttrs: {
       version = "2.13.1";
 
