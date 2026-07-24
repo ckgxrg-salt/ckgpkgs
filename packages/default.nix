@@ -4,21 +4,20 @@
 }:
 # All packages
 with pkgs;
-{
+rec {
   # Astal
   astal = {
     daywatch = callPackage ./astal/daywatch.nix { inherit ags; };
-  };
-
-  # Neovim plugins
-  nvim = with pkgs.vimUtils; {
-    im-select-nvim = callPackage ./neovim/im-select-nvim.nix { inherit buildVimPlugin; };
   };
 
   # Services
   alumnimap = callPackage ./welkin/alumnimap.nix { };
   matrix-qq = callPackage ./welkin/matrix-qq.nix { };
   postmoogle = callPackage ./welkin/postmoogle.nix { };
+
+  # Python
+  ko-speech-tools = python313Packages.callPackage ./python/ko-speech-tools.nix { };
+  coqui-tts = python313Packages.callPackage ./python/coqui-tts.nix { inherit ko-speech-tools; };
 
   # Fonts
   line-seed = callPackage ./fonts/line-seed.nix { };
