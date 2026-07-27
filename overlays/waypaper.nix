@@ -8,6 +8,10 @@ final: prev: {
         tag = finalAttrs.version;
         hash = "sha256-BTbpl7h/VG+yD7Uo+088j3CLwhhYacABlSyKajI+o3U=";
       };
+
+      patches = [
+        ./force-background.patch
+      ];
     }
   );
 }

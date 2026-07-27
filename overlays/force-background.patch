@@ -1,0 +1,10 @@
+--- a/waypaper/changer.py
++++ b/waypaper/changer.py
+@@ -405,6 +405,7 @@
+
+     options.extend(["--volume", str(cf.linux_wallpaperengine_volume)])
+     options.extend(["--fps", str(cf.linux_wallpaperengine_fps)])
++    options.extend(["--layer", "background"])
+
+     if monitor == "All":
+         for monitor in [m.name for m in screeninfo.get_monitors()]:
