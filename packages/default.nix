@@ -10,6 +10,9 @@ rec {
     daywatch = callPackage ./astal/daywatch.nix { inherit ags; };
   };
 
+  # Niri
+  oniri = callPackage ./niri/oniri.nix { };
+
   # Services
   alumnimap = callPackage ./welkin/alumnimap.nix { };
   matrix-qq = callPackage ./welkin/matrix-qq.nix { };
