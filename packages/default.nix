@@ -12,6 +12,7 @@ rec {
 
   # Niri
   oniri = callPackage ./niri/oniri.nix { };
+  niri-scratchpad-rs = callPackage ./niri/niri-scratchpad-rs.nix { };
 
   # Services
   alumnimap = callPackage ./welkin/alumnimap.nix { };
