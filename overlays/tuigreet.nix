@@ -7,12 +7,12 @@ final: prev: {
         inherit (prevAttrs.src) repo;
         owner = "NotAShelf";
         tag = finalAttrs.version;
-        hash = "sha256-4DB4Pl2UwIeab/MJaX3VfVNMsPWE6Q513z1NDdxvG3o=";
+        hash = "sha256-jeelrp9r/V8540qKoCofD8wz/w/qBcubs72HkremhME=";
       };
 
       cargoDeps = final.rustPlatform.fetchCargoVendor {
         inherit (finalAttrs) src;
-        hash = "sha256-5Q4E8nnmQ109gcfxxctn/rne5N4Qvz2Pft6o7as2fSc=";
+        hash = "sha256-B5Qxwv8jdpGJwXTEm5c12kvb6fri7H1AL2w640xQXVQ=";
       };
     }
   );
