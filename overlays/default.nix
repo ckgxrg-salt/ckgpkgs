@@ -3,7 +3,6 @@ rec {
   waypaper = import ./waypaper.nix;
   matugen = import ./matugen.nix;
   cartridges = import ./cartridges.nix;
-  linux-wallpaperengine = import ./linux-wallpaperengine.nix;
   piper-tts = import ./piper-tts.nix;
 
   all = [
@@ -11,7 +10,6 @@ rec {
     waypaper
     matugen
     cartridges
-    linux-wallpaperengine
     piper-tts
   ];
 }
