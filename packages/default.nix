@@ -4,7 +4,7 @@
 }:
 # All packages
 with pkgs;
-rec {
+{
   # Astal
   astal = {
     daywatch = callPackage ./astal/daywatch.nix { inherit ags; };
@@ -20,8 +20,7 @@ rec {
   postmoogle = callPackage ./welkin/postmoogle.nix { };
 
   # Python
-  ko-speech-tools = python313Packages.callPackage ./python/ko-speech-tools.nix { };
-  coqui-tts = python313Packages.callPackage ./python/coqui-tts.nix { inherit ko-speech-tools; };
+  moss-tts-nano = callPackage ./moss-tts-nano.nix { };
 
   # Fonts
   line-seed = callPackage ./fonts/line-seed.nix { };
