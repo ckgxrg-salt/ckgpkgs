@@ -2,16 +2,11 @@
   description = "ckgxrg's miscellaneous Nix packages";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    ags = {
-      url = "github:aylur/ags";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
   outputs =
     {
       self,
       nixpkgs,
-      ags,
       ...
     }:
     let
@@ -26,7 +21,7 @@
       };
     in
     {
-      packages.${system} = import ./packages { inherit pkgs ags; };
+      packages.${system} = import ./packages pkgs;
 
       overlays.${system} = import ./overlays;
       overlay-pkgs = import nixpkgs {

@@ -1,14 +1,7 @@
-{
-  pkgs,
-  ags,
-}:
+pkgs:
 # All packages
-with pkgs;
-{
-  # Astal
-  astal = {
-    daywatch = callPackage ./astal/daywatch.nix { inherit ags; };
-  };
+with pkgs; {
+  dwsh = callPackage ./dwsh.nix { };
 
   # Niri
   oniri = callPackage ./niri/oniri.nix { };
