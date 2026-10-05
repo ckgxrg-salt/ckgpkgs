@@ -8,17 +8,17 @@
   gtk4,
   gtk4-layer-shell,
 }:
-rustPlatform.buildRustPackage {
+rustPlatform.buildRustPackage (finalAttrs: {
   pname = "dwsh";
   version = "0.0.1";
 
   src = fetchFromCodeberg {
     owner = "ckgxrg";
     repo = "dwsh";
-    rev = "main";
-    hash = "sha256-7hm32m0w62t6iqhRwT4Et0WB4uXwdy9Hiz9BO1GACq4=";
+    tag = "v${finalAttrs.version}";
+    hash = "sha256-8d3EgPHbGS5E3KxnZM6uYTWVHHWo9mJTlVlCvpCw318=";
   };
-  cargoHash = "sha256-Nod9I++aEOHNY6pHlmngu62dW9Ps1RDe8M8/oLO0tbQ=";
+  cargoHash = "sha256-jf2t5j892vF7Fkrvw2KyfF5RphhJndixb0twMnR9Vzk=";
 
   nativeBuildInputs = [
     pkg-config
@@ -37,4 +37,4 @@ rustPlatform.buildRustPackage {
     license = lib.licenses.bsd2;
     maintainers = with lib.maintainers; [ ckgxrg ];
   };
-}
+})
