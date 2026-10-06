@@ -10,13 +10,13 @@
 }:
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "dwsh";
-  version = "0.0.1";
+  version = "0.0.2";
 
   src = fetchFromCodeberg {
     owner = "ckgxrg";
     repo = "dwsh";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-8d3EgPHbGS5E3KxnZM6uYTWVHHWo9mJTlVlCvpCw318=";
+    hash = "sha256-NM1ja57g3QX+ONBzP5udkFePyyDq8xeBcvVqEzZLt0Y=";
   };
   cargoHash = "sha256-jf2t5j892vF7Fkrvw2KyfF5RphhJndixb0twMnR9Vzk=";
 
